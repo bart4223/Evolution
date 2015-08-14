@@ -1,5 +1,6 @@
 package Evolution.Creatures;
 
+import Evolution.CustomHabitat;
 import Uniwork.Base.NGObject;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.Iterator;
 
 public abstract class CustomEvolutionProcess extends NGObject {
 
-    protected CreatureManager FCreatureManager;
+    protected CustomHabitat FHabitat;
     protected ArrayList<CustomCreature> FCreaturesBorn;
     protected ArrayList<CustomCreature> FCreaturesDie;
 
@@ -27,15 +28,15 @@ public abstract class CustomEvolutionProcess extends NGObject {
         FCreaturesDie.add(aCreature);
     }
 
-    public CustomEvolutionProcess(CreatureManager aCreatureManager) {
+    public CustomEvolutionProcess(CustomHabitat aHabitat) {
         super();
-        FCreatureManager = aCreatureManager;
+        FHabitat = aHabitat;
         FCreaturesBorn = new ArrayList<CustomCreature>();
         FCreaturesDie = new ArrayList<CustomCreature>();
     }
 
-    public CreatureManager getCreatureManager() {
-        return FCreatureManager;
+    public CustomHabitat getHabitat() {
+        return FHabitat;
     }
 
     public void Start() {

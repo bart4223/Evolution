@@ -1,23 +1,24 @@
 package Evolution.Creatures;
 
+import Evolution.CustomHabitat;
 import Uniwork.Base.NGObject;
 import javafx.scene.paint.Color;
 
 public abstract class CustomCreature extends NGObject {
 
-    protected CreatureManager FCreatureManager;
+    protected CustomHabitat FHabitat;
     protected CustomEvolutionProcess FEvolutionProcess;
     protected Color FColor;
 
-    public CustomCreature(CreatureManager aCreatureManager, CustomEvolutionProcess aEvolutionProcess) {
+    public CustomCreature(CustomHabitat aHabitat, CustomEvolutionProcess aEvolutionProcess) {
         super();
-        FCreatureManager = aCreatureManager;
+        FHabitat = aHabitat;
         FEvolutionProcess = aEvolutionProcess;
         FColor = Color.BLUE;
     }
 
-    public CreatureManager getCreatureManager() {
-        return FCreatureManager;
+    public CustomHabitat getHabitat() {
+        return FHabitat;
     }
 
     public CustomEvolutionProcess getEvolutionProcess() {

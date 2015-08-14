@@ -21,7 +21,7 @@ public class Habitat2DDisplayController extends NGDisplayController {
     protected void DoRender() {
         super.DoRender();
         if (Habitat != null) {
-            Iterator<CustomCreature> itr = Habitat.getCreatureManager().getCreatures();
+            Iterator<CustomCreature> itr = Habitat.getCreatures();
             while (itr.hasNext()) {
                 Creature2D creature = (Creature2D)itr.next();
                 NGPoint2D pos = creature.getPosition();

@@ -1,5 +1,6 @@
 package Evolution.Creatures;
 
+import Evolution.CustomHabitat;
 import Uniwork.Graphics.NGPoint2D;
 
 import java.util.Iterator;
@@ -21,13 +22,13 @@ public class GameOfLife2D extends CustomEvolutionProcess {
                     return;
             }
         }
-        Born(new Creature2D(FCreatureManager, this, aX, aY));
+        Born(new Creature2D(FHabitat, this, aX, aY));
     }
 
     @Override
     protected void DoExecute(CustomCreature aCreature) {
         super.DoExecute(aCreature);
-        Iterator<CustomCreature> itr = FCreatureManager.getCreatures();
+        Iterator<CustomCreature> itr = FHabitat.getCreatures();
         while (itr.hasNext()) {
             CustomCreature c = itr.next();
             if (c instanceof Creature2D) {
@@ -37,8 +38,8 @@ public class GameOfLife2D extends CustomEvolutionProcess {
         Born(1, 1);
     }
 
-    public GameOfLife2D(CreatureManager aCreatureManager) {
-        super(aCreatureManager);
+    public GameOfLife2D(CustomHabitat aHabitat) {
+        super(aHabitat);
     }
 
 }
