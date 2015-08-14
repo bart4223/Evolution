@@ -6,7 +6,7 @@ import Uniwork.Base.NGComponent;
 
 public class EvolutionApplicationModule extends NGVisualApplicationModule {
 
-    protected Habitat FHabitat;
+    protected CustomHabitat FHabitat;
 
     @Override
     protected void DoBeforeInitialize() {
@@ -17,18 +17,26 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         item = FStageManager.addStageItem("Habitat");
         item.setCaption(String.format("%s.Habitat", FName));
         item.setPosition(1500, 300);
+        getHabitat().addEventListener((HabitatEventListener)item);
+    }
+
+    @Override
+    protected void DoAfterInitialize() {
+        super.DoAfterInitialize();
+        // ToDo
+        getHabitat().addCreature(new Creature2D(getHabitat().getCreatureManager(), 10, 10));
     }
 
     public EvolutionApplicationModule(NGComponent aOwner, String aName, String aDescription) {
         super(aOwner, aName, aDescription);
-        FComponentManager.registerComponent(new Habitat(this, EvolutionConsts.C_COMPONENT_HABITAT));
+        FComponentManager.registerComponent(new Habitat2D(this, EvolutionConsts.C_COMPONENT_HABITAT));
         FStageManager.registerItemClass("Control", "Evolution.HabitatControlStageItem");
         FStageManager.registerItemClass("Habitat", "Evolution.HabitatStageItem");
     }
 
-    public Habitat getHabitat() {
+    public CustomHabitat getHabitat() {
         if (FHabitat == null)
-            FHabitat = (Habitat)FComponentManager.getComponent(EvolutionConsts.C_COMPONENT_HABITAT);
+            FHabitat = (CustomHabitat)FComponentManager.getComponent(EvolutionConsts.C_COMPONENT_HABITAT);
         return FHabitat;
     }
 

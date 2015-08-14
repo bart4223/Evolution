@@ -13,6 +13,9 @@ public class HabitatStageController extends NGStageController {
     @FXML
     private Canvas Layer0;
 
+    @FXML
+    private Canvas Layer1;
+
     @Override
     protected void CreateDisplayController() {
         super.CreateDisplayController();
@@ -32,4 +35,10 @@ public class HabitatStageController extends NGStageController {
     public HabitatStageController(NGCustomStageItem aStageItem) {
         super(aStageItem);
     }
+
+    public void addCreature(CustomCreature aCreature) {
+        // ToDo
+        System.out.println(aCreature.getInfo());
+    }
+
 }
