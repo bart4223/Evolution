@@ -16,13 +16,26 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     protected void addCreature(CustomCreature aCreature) {
         FCreatureManager.addCreature(aCreature);
         raiseCreatureAddedEvent(aCreature);
-        writeInfo(String.format("Creature added [%s]", aCreature.getInfo()));
+        writeInfo(String.format("Creature born [%s]", aCreature.getInfo()));
+    }
+
+    protected void removeCreature(CustomCreature aCreature) {
+        FCreatureManager.removeCreature(aCreature);
+        raiseCreatureRemovedEvent(aCreature);
+        writeInfo(String.format("Creature died [%s]", aCreature.getInfo()));
     }
 
     protected synchronized void raiseCreatureAddedEvent(CustomCreature aCreature) {
         CreatureEvent event = new CreatureEvent(this, aCreature);
         for (HabitatEventListener listener : FEventListeners) {
             listener.handleCreatureAdded(event);
+        }
+    }
+
+    protected synchronized void raiseCreatureRemovedEvent(CustomCreature aCreature) {
+        CreatureEvent event = new CreatureEvent(this, aCreature);
+        for (HabitatEventListener listener : FEventListeners) {
+            listener.handleCreatureRemoved(event);
         }
     }
 

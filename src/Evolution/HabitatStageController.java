@@ -51,4 +51,12 @@ public class HabitatStageController extends NGStageController {
         }
     }
 
+    public void removeCreature(CustomHabitat aHabitat, CustomCreature aCreature) {
+        if (aHabitat instanceof Habitat2D) {
+            Habitat2DDisplayController dc = (Habitat2DDisplayController)getDisplayController("Habitat");
+            dc.Habitat = (Habitat2D)aHabitat;
+            RenderScene(dc);
+        }
+    }
+
 }

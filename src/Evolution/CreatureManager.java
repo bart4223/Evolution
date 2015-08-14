@@ -22,6 +22,10 @@ public class CreatureManager extends NGComponent {
         FCreatures.add(aCreature);
     }
 
+    public void removeCreature(CustomCreature aCreature) {
+        FCreatures.remove(aCreature);
+    }
+
     public Iterator<CustomCreature> getCreatures() {
         return FCreatures.iterator();
     }
