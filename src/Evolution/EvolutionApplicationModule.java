@@ -6,6 +6,8 @@ import Uniwork.Base.NGComponent;
 
 public class EvolutionApplicationModule extends NGVisualApplicationModule {
 
+    protected Habitat FHabitat;
+
     @Override
     protected void DoBeforeInitialize() {
         super.DoBeforeInitialize();
@@ -22,6 +24,12 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         FComponentManager.registerComponent(new Habitat(this, EvolutionConsts.C_COMPONENT_HABITAT));
         FStageManager.registerItemClass("Control", "Evolution.HabitatControlStageItem");
         FStageManager.registerItemClass("Habitat", "Evolution.HabitatStageItem");
+    }
+
+    public Habitat getHabitat() {
+        if (FHabitat == null)
+            FHabitat = (Habitat)FComponentManager.getComponent(EvolutionConsts.C_COMPONENT_HABITAT);
+        return FHabitat;
     }
 
 }
