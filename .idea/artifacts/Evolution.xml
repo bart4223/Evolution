@@ -1,0 +1,24 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" build-on-make="true" name="Evolution">
+    <output-path>$PROJECT_DIR$/out/artifacts/Evolution</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="Evolution.Main" />
+        <option name="description" value="" />
+        <option name="htmlParamFile" value="" />
+        <option name="paramFile" value="" />
+        <option name="title" value="" />
+        <option name="vendor" value="" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="Evolution.jar">
+        <element id="module-output" name="Evolution" />
+        <element id="module-output" name="Uniwork" />
+      </element>
+      <element id="directory" name="resources">
+        <element id="dir-copy" path="$PROJECT_DIR$/resources" />
+      </element>
+    </root>
+  </artifact>
+</component>
