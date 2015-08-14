@@ -16,6 +16,6 @@ public class HabitatStageItem extends NGCustomStageItem implements HabitatEventL
     @Override
     public void handleCreatureAdded(CreatureEvent e) {
         HabitatStageController sc = (HabitatStageController)FStageController;
-        sc.addCreature(e.getCreature());
+        sc.addCreature(e.getHabitat(), e.getCreature());
     }
 }

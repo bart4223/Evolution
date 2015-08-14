@@ -3,6 +3,7 @@ package Evolution;
 import Uniwork.Base.NGComponent;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class CreatureManager extends NGComponent {
 
@@ -19,6 +20,10 @@ public class CreatureManager extends NGComponent {
 
     public void addCreature(CustomCreature aCreature) {
         FCreatures.add(aCreature);
+    }
+
+    public Iterator<CustomCreature> getCreatures() {
+        return FCreatures.iterator();
     }
 
 }

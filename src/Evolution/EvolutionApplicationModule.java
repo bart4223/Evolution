@@ -24,7 +24,9 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
     protected void DoAfterInitialize() {
         super.DoAfterInitialize();
         // ToDo
-        getHabitat().addCreature(new Creature2D(getHabitat().getCreatureManager(), 10, 10));
+        getHabitat().addCreature(new Creature2D(getHabitat().getCreatureManager(), 1, 2));
+        getHabitat().addCreature(new Creature2D(getHabitat().getCreatureManager(), 2, 1));
+        getHabitat().addCreature(new Creature2D(getHabitat().getCreatureManager(), 2, 2));
     }
 
     public EvolutionApplicationModule(NGComponent aOwner, String aName, String aDescription) {

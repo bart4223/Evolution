@@ -1,14 +1,17 @@
 package Evolution;
 
 import Uniwork.Base.NGObject;
+import javafx.scene.paint.Color;
 
 public abstract class CustomCreature extends NGObject {
 
     protected CreatureManager FCreatureManager;
+    protected Color FColor;
 
     public CustomCreature(CreatureManager aCreatureManager) {
         super();
         FCreatureManager = aCreatureManager;
+        FColor = Color.BLUE;
     }
 
     public CreatureManager getCreatureManager() {
@@ -17,6 +20,10 @@ public abstract class CustomCreature extends NGObject {
 
     public String getInfo() {
         return "";
+    }
+
+    public Color getColor() {
+        return FColor;
     }
 
 }
