@@ -16,18 +16,7 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     protected ArrayList<HabitatEventListener> FEventListeners;
     protected ArrayList<CustomEvolutionProcess> FEvolutionProcesses;
     protected ArrayList<CustomCreature> FCreatures;
-
-    protected void addCreature(CustomCreature aCreature) {
-        FCreatures.add(aCreature);
-        raiseCreatureAddedEvent(aCreature);
-        writeInfo(String.format("Creature born [%s]", aCreature.getInfo()));
-    }
-
-    protected void removeCreature(CustomCreature aCreature) {
-        FCreatures.remove(aCreature);
-        raiseCreatureRemovedEvent(aCreature);
-        writeInfo(String.format("Creature died [%s]", aCreature.getInfo()));
-    }
+    protected ArrayList<HabitatCell> FCells;
 
     protected void InternalEvolution() {
         for (CustomEvolutionProcess ep : FEvolutionProcesses) {
@@ -42,12 +31,7 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     }
 
     protected void DoEvolution(CustomEvolutionProcess aEvolutionProcess) {
-        for (CustomCreature creature : FCreatures) {
-            if (creature.getEvolutionProcess().equals(aEvolutionProcess)) {
-                writeInfo(String.format("Evolution of creature [%s]", creature.getInfo()));
-                creature.Evolution();
-            }
-        }
+        aEvolutionProcess.Execute();
         Iterator<CustomCreature> itr = aEvolutionProcess.getCreaturesBorn();
         while (itr.hasNext()) {
             addCreature(itr.next());
@@ -72,11 +56,48 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         }
     }
 
+    protected void DoInitializeCells() {
+
+    }
+
+    protected void InitializeCells() {
+        FCells.clear();
+        DoInitializeCells();
+        writeInfo(String.format("%d cells allocated", FCells.size()));
+    }
+
+    @Override
+    protected void DoInitialize() {
+        super.DoInitialize();
+        InitializeCells();
+    }
+
+    protected void AssignToCell(CustomCreature aCreature) {
+
+    }
+
+    protected void InternaladdCreature(CustomCreature aCreature) {
+        FCreatures.add(aCreature);
+        if (FCells.size() > 0)
+            AssignToCell(aCreature);
+    }
+
+    protected void UnassignFromCell(CustomCreature aCreature) {
+
+    }
+
+    protected void InternalremoveCreature(CustomCreature aCreature) {
+        FCreatures.add(aCreature);
+        if (FCells.size() > 0)
+            UnassignFromCell(aCreature);
+    }
+
     public CustomHabitat(NGComponent aOwner, String aName) {
         super(aOwner, aName);
         FLogManager = new NGLogManager();
         FLogManager.addEventListener(this);
         FEventListeners = new ArrayList<HabitatEventListener>();
+        FCells = new ArrayList<HabitatCell>();
         FCreatures = new ArrayList<CustomCreature>();
         FEvolutionProcesses = new ArrayList<CustomEvolutionProcess>();
     }
@@ -93,12 +114,28 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         FEvolutionProcesses.add(aEvolutionProcess);
     }
 
+    public void addCreature(CustomCreature aCreature) {
+        InternaladdCreature(aCreature);
+        raiseCreatureAddedEvent(aCreature);
+        writeInfo(String.format("Creature born [%s]", aCreature.getInfo()));
+    }
+
+    public void removeCreature(CustomCreature aCreature) {
+        FCreatures.remove(aCreature);
+        raiseCreatureRemovedEvent(aCreature);
+        writeInfo(String.format("Creature died [%s]", aCreature.getInfo()));
+    }
+
     public void Evolution() {
         InternalEvolution();
     }
 
     public Iterator<CustomCreature> getCreatures() {
         return FCreatures.iterator();
+    }
+
+    public ArrayList<HabitatCell> getCells() {
+        return FCells;
     }
 
     @Override

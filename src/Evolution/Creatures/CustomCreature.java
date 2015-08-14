@@ -33,8 +33,4 @@ public abstract class CustomCreature extends NGObject {
         return FColor;
     }
 
-    public void Evolution() {
-        FEvolutionProcess.Execute(this);
-    }
-
 }

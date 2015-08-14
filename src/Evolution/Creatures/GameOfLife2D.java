@@ -1,9 +1,11 @@
 package Evolution.Creatures;
 
 import Evolution.CustomHabitat;
+import Evolution.Habitat2D;
+import Evolution.HabitatCell;
 import Uniwork.Graphics.NGPoint2D;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 
 public class GameOfLife2D extends CustomEvolutionProcess {
 
@@ -12,6 +14,9 @@ public class GameOfLife2D extends CustomEvolutionProcess {
     // 2. Zelle mit Lebewesen und weniger als 2 benachbarten lebenden Zellen sterben
     // 3. Zelle mit Lebewesen und 2 oder 3 benachbarten lebenden Zellen bleiben leben
     // 4. Zelle mit Lebewesen und mehr als 3 benachbarten lebenden Zellen sterben
+
+    protected Integer FWidth;
+    protected Integer FHeight;
 
     protected void Born(double aX, double aY) {
         for (CustomCreature c : FCreaturesBorn) {
@@ -26,20 +31,19 @@ public class GameOfLife2D extends CustomEvolutionProcess {
     }
 
     @Override
-    protected void DoExecute(CustomCreature aCreature) {
-        super.DoExecute(aCreature);
-        Iterator<CustomCreature> itr = FHabitat.getCreatures();
-        while (itr.hasNext()) {
-            CustomCreature c = itr.next();
-            if (c instanceof Creature2D) {
-                Creature2D creature = (Creature2D) c;
+    protected void DoExecute() {
+        ArrayList<HabitatCell> cells = FHabitat.getCells();
+        for (int y = 0; y < FHeight; y++) {
+            for (int x = 0; x < FWidth; x++) {
+
             }
         }
-        Born(1, 1);
     }
 
     public GameOfLife2D(CustomHabitat aHabitat) {
         super(aHabitat);
+        FWidth = ((Habitat2D)FHabitat).getWidth();
+        FHeight = ((Habitat2D)FHabitat).getHeight();
     }
 
 }

@@ -12,7 +12,7 @@ public abstract class CustomEvolutionProcess extends NGObject {
     protected ArrayList<CustomCreature> FCreaturesBorn;
     protected ArrayList<CustomCreature> FCreaturesDie;
 
-    protected void DoExecute(CustomCreature aCreature) {
+    protected void DoExecute() {
 
     }
 
@@ -44,8 +44,8 @@ public abstract class CustomEvolutionProcess extends NGObject {
         FCreaturesDie.clear();
     }
 
-    public void Execute(CustomCreature aCreature) {
-        DoExecute(aCreature);
+    public void Execute() {
+        DoExecute();
     }
 
     public void End() {
