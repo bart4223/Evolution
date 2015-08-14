@@ -1,5 +1,8 @@
 package Evolution;
 
+import Evolution.Creatures.CreatureEvent;
+import Evolution.Creatures.CreatureManager;
+import Evolution.Creatures.CustomCreature;
 import Uniwork.Base.NGComponent;
 import Uniwork.Misc.NGLogEvent;
 import Uniwork.Misc.NGLogEventListener;

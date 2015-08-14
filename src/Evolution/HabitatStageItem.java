@@ -1,5 +1,6 @@
 package Evolution;
 
+import Evolution.Creatures.CreatureEvent;
 import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Appl.NGStageManager;
 import javafx.stage.Stage;

@@ -1,4 +1,4 @@
-package Evolution;
+package Evolution.Creatures;
 
 import Uniwork.Base.NGComponent;
 

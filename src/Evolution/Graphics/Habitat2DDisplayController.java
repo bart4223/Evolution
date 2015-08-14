@@ -1,7 +1,7 @@
 package Evolution.Graphics;
 
-import Evolution.Creature2D;
-import Evolution.CustomCreature;
+import Evolution.Creatures.Creature2D;
+import Evolution.Creatures.CustomCreature;
 import Evolution.Habitat2D;
 import Uniwork.Graphics.NGPoint2D;
 import Uniwork.Visuals.NGDisplayController;

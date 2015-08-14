@@ -1,5 +1,6 @@
 package Evolution;
 
+import Evolution.Creatures.Creature2D;
 import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Appl.NGVisualApplicationModule;
 import Uniwork.Base.NGComponent;

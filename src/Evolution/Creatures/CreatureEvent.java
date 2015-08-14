@@ -1,4 +1,6 @@
-package Evolution;
+package Evolution.Creatures;
+
+import Evolution.HabitatEvent;
 
 public class CreatureEvent extends HabitatEvent {
 

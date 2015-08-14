@@ -1,5 +1,6 @@
-package Evolution;
+package Evolution.Creatures;
 
+import Evolution.Creatures.CreatureManager;
 import Uniwork.Base.NGObject;
 import javafx.scene.paint.Color;
 

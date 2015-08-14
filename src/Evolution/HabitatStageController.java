@@ -1,5 +1,6 @@
 package Evolution;
 
+import Evolution.Creatures.CustomCreature;
 import Evolution.Graphics.Habitat2DDisplayController;
 import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Visuals.NGDisplayView;
