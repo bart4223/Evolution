@@ -8,7 +8,7 @@ public class HabitatControlStageController extends NGStageController {
 
     @FXML
     protected void handleNext(){
-        System.out.println("OK");
+        Invoke("Habitat", "Next");
     }
 
     public HabitatControlStageController() {

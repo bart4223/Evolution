@@ -28,6 +28,10 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         writeInfo(String.format("Creature died [%s]", aCreature.getInfo()));
     }
 
+    protected void DoEvolution() {
+        FCreatureManager.Evolution();
+    }
+
     protected synchronized void raiseCreatureAddedEvent(CustomCreature aCreature) {
         CreatureEvent event = new CreatureEvent(this, aCreature);
         for (HabitatEventListener listener : FEventListeners) {
@@ -44,9 +48,10 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
 
     public CustomHabitat(NGComponent aOwner, String aName) {
         super(aOwner, aName);
-        FCreatureManager = new CreatureManager(this);
         FLogManager = new NGLogManager();
         FLogManager.addEventListener(this);
+        FCreatureManager = new CreatureManager(this);
+        FCreatureManager.setLogManager(FLogManager);
         FEventListeners = new ArrayList<HabitatEventListener>();
     }
 
@@ -60,6 +65,10 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
 
     public void removeEventListener(HabitatEventListener aListener)   {
         FEventListeners.remove(aListener);
+    }
+
+    public void Evolution() {
+        DoEvolution();
     }
 
     @Override

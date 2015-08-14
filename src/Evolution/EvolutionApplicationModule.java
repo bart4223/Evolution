@@ -1,6 +1,9 @@
 package Evolution;
 
 import Evolution.Creatures.Creature2D;
+import Evolution.Creatures.CreatureManager;
+import Evolution.Creatures.CustomEvolutionProcess;
+import Evolution.Creatures.GameOfLife;
 import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Appl.NGVisualApplicationModule;
 import Uniwork.Base.NGComponent;
@@ -25,9 +28,18 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
     protected void DoAfterInitialize() {
         super.DoAfterInitialize();
         // ToDo
-        getHabitat().addCreature(new Creature2D(getHabitat().getCreatureManager(), 1, 2));
-        getHabitat().addCreature(new Creature2D(getHabitat().getCreatureManager(), 2, 1));
-        getHabitat().addCreature(new Creature2D(getHabitat().getCreatureManager(), 2, 2));
+        CustomHabitat h = getHabitat();
+        CreatureManager cm = h.getCreatureManager();
+        CustomEvolutionProcess ep = new GameOfLife(cm);
+        cm.addEvolutionProcess(ep);
+        h.addCreature(new Creature2D(cm, ep, 1, 2));
+        h.addCreature(new Creature2D(cm, ep, 2, 1));
+        h.addCreature(new Creature2D(cm, ep, 2, 2));
+    }
+
+    @Override
+    protected void registerObjectRequests() {
+        registerObjectRequest("Habitat", getHabitat(), "Next", "Evolution");
     }
 
     public EvolutionApplicationModule(NGComponent aOwner, String aName, String aDescription) {
