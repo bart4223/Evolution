@@ -30,7 +30,7 @@ public class Main extends NGApplication {
     }
 
     public void addEvolutionModule() {
-        //addModule(EvolutionApplicationModule.class, true);
+        addModule(EvolutionApplicationModule.class, true);
     }
 
 }
