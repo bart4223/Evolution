@@ -8,7 +8,6 @@ import java.util.Iterator;
 public class CreatureManager extends NGComponent {
 
     protected ArrayList<CustomCreature> FCreatures;
-    protected ArrayList<CustomEvolutionProcess> FEvolutionProcesses;
 
     protected void DoEvolution(CustomEvolutionProcess aEvolutionProcess) {
         for (CustomCreature creature : FCreatures) {
@@ -19,12 +18,6 @@ public class CreatureManager extends NGComponent {
         }
     }
 
-    protected void InternalEvolution() {
-        for (CustomEvolutionProcess eP : FEvolutionProcesses) {
-            DoEvolution(eP);
-        }
-    }
-
     public CreatureManager(NGComponent aOwner) {
         this(aOwner, "");
     }
@@ -32,7 +25,6 @@ public class CreatureManager extends NGComponent {
     public CreatureManager(NGComponent aOwner, String aName) {
         super(aOwner, aName);
         FCreatures = new ArrayList<CustomCreature>();
-        FEvolutionProcesses = new ArrayList<CustomEvolutionProcess>();
     }
 
     public void addCreature(CustomCreature aCreature) {
@@ -47,12 +39,8 @@ public class CreatureManager extends NGComponent {
         return FCreatures.iterator();
     }
 
-    public void addEvolutionProcess(CustomEvolutionProcess aEvolutionProcess) {
-        FEvolutionProcesses.add(aEvolutionProcess);
-    }
-
-    public void Evolution() {
-        InternalEvolution();
+    public void Evolution(CustomEvolutionProcess aEvolutionProcess) {
+        DoEvolution(aEvolutionProcess);
     }
 
 }

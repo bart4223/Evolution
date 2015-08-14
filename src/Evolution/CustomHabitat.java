@@ -3,18 +3,21 @@ package Evolution;
 import Evolution.Creatures.CreatureEvent;
 import Evolution.Creatures.CreatureManager;
 import Evolution.Creatures.CustomCreature;
+import Evolution.Creatures.CustomEvolutionProcess;
 import Uniwork.Base.NGComponent;
 import Uniwork.Misc.NGLogEvent;
 import Uniwork.Misc.NGLogEventListener;
 import Uniwork.Misc.NGLogManager;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public abstract class CustomHabitat extends NGComponent implements NGLogEventListener {
 
     protected CreatureManager FCreatureManager;
 
     protected ArrayList<HabitatEventListener> FEventListeners;
+    protected ArrayList<CustomEvolutionProcess> FEvolutionProcesses;
 
     protected void addCreature(CustomCreature aCreature) {
         FCreatureManager.addCreature(aCreature);
@@ -28,8 +31,28 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         writeInfo(String.format("Creature died [%s]", aCreature.getInfo()));
     }
 
-    protected void DoEvolution() {
-        FCreatureManager.Evolution();
+    protected void InternalEvolution() {
+        for (CustomEvolutionProcess ep : FEvolutionProcesses) {
+            ep.Start();
+            try {
+                DoEvolution(ep);
+            }
+            finally {
+                ep.End();
+            }
+        }
+    }
+
+    protected void DoEvolution(CustomEvolutionProcess aEvolutionProcess) {
+        FCreatureManager.Evolution(aEvolutionProcess);
+        Iterator<CustomCreature> itr = aEvolutionProcess.getCreaturesBorn();
+        while (itr.hasNext()) {
+            addCreature(itr.next());
+        }
+        itr = aEvolutionProcess.getCreaturesDie();
+        while (itr.hasNext()) {
+            removeCreature(itr.next());
+        }
     }
 
     protected synchronized void raiseCreatureAddedEvent(CustomCreature aCreature) {
@@ -50,9 +73,10 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         super(aOwner, aName);
         FLogManager = new NGLogManager();
         FLogManager.addEventListener(this);
+        FEventListeners = new ArrayList<HabitatEventListener>();
         FCreatureManager = new CreatureManager(this);
         FCreatureManager.setLogManager(FLogManager);
-        FEventListeners = new ArrayList<HabitatEventListener>();
+        FEvolutionProcesses = new ArrayList<CustomEvolutionProcess>();
     }
 
     public CreatureManager getCreatureManager() {
@@ -67,8 +91,12 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         FEventListeners.remove(aListener);
     }
 
+    public void addEvolutionProcess(CustomEvolutionProcess aEvolutionProcess) {
+        FEvolutionProcesses.add(aEvolutionProcess);
+    }
+
     public void Evolution() {
-        DoEvolution();
+        InternalEvolution();
     }
 
     @Override
