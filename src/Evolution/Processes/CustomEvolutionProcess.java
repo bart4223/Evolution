@@ -1,5 +1,6 @@
-package Evolution.Creatures;
+package Evolution.Processes;
 
+import Evolution.Creatures.CustomCreature;
 import Evolution.CustomHabitat;
 import Uniwork.Base.NGObject;
 

@@ -8,7 +8,7 @@ public class SampleBiotope01 extends CustomBiotope {
     public SampleBiotope01() {
         super();
         FName = "Sample01";
-        FDescription = "Clocks & Blinker";
+        FDescription = "Clocks & Blinker biotope";
         FColonies.add(new BlinkerColony(2.0, 2.0));
         FColonies.add(new BlinkerColony(10.0, 20.0));
         FColonies.add(new BlinkerColony(40.0, 40.0));

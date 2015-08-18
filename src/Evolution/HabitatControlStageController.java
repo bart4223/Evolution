@@ -48,6 +48,7 @@ public class HabitatControlStageController extends NGStageController {
         cbSamples.getItems().add("Sample04");
         cbSamples.getItems().add("Sample05");
         cbSamples.getItems().add("Sample06");
+        cbSamples.getItems().add("Sample07");
     }
 
     public HabitatControlStageController() {

@@ -1,8 +1,11 @@
-package Evolution.Creatures;
+package Evolution.Processes;
 
+import Evolution.Creatures.CustomCreature;
+import Evolution.Creatures.Protozoa;
 import Evolution.CustomHabitat;
 import Evolution.Habitat2D;
 import Evolution.HabitatCell;
+import Evolution.Processes.CustomEvolutionProcess;
 import Uniwork.Graphics.NGPoint2D;
 
 import java.util.ArrayList;

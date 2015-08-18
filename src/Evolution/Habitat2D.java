@@ -1,6 +1,7 @@
 package Evolution;
 
 import Evolution.Creatures.*;
+import Evolution.Processes.CustomEvolutionProcess;
 import Uniwork.Base.NGComponent;
 import Uniwork.Graphics.NGPoint2D;
 import Uniwork.Misc.NGLogEvent;

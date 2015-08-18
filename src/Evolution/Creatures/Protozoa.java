@@ -1,6 +1,7 @@
 package Evolution.Creatures;
 
 import Evolution.CustomHabitat;
+import Evolution.Processes.CustomEvolutionProcess;
 import Uniwork.Graphics.NGPoint2D;
 
 public class Protozoa extends CustomCreature {

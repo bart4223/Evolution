@@ -7,7 +7,7 @@ public class SampleBiotope03 extends CustomBiotope {
     public SampleBiotope03() {
         super();
         FName = "Sample03";
-        FDescription = "Bipole, Tripole, Pulsator & Porpoise";
+        FDescription = "Bipole, Tripole, Pulsator & Porpoise biotope";
         FColonies.add(new BipoleColony(6.0, 2.0));
         FColonies.add(new TripoleColony(50.0, 10.0));
         FColonies.add(new BlinkerColony(10.0, 28.0));

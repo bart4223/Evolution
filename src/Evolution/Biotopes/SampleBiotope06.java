@@ -7,7 +7,7 @@ public class SampleBiotope06 extends CustomBiotope {
     public SampleBiotope06() {
         super();
         FName = "Sample06";
-        FDescription = "The Pentomino colony";
+        FDescription = "The Pentomino biotope";
         FColonies.add(new PentominoColony(38.0, 32.0));
     }
 

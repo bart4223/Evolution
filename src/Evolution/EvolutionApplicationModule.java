@@ -1,8 +1,8 @@
 package Evolution;
 
 import Evolution.Biotopes.*;
-import Evolution.Creatures.CustomEvolutionProcess;
-import Evolution.Creatures.GameOfLife2D;
+import Evolution.Processes.CustomEvolutionProcess;
+import Evolution.Processes.GameOfLife2D;
 import Uniwork.Appl.NGApplication;
 import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Appl.NGVisualApplicationModule;
@@ -44,6 +44,7 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         registerObjectRequest("HabitatModule", this, "Sample04", "LoadSampleBiotope04");
         registerObjectRequest("HabitatModule", this, "Sample05", "LoadSampleBiotope05");
         registerObjectRequest("HabitatModule", this, "Sample06", "LoadSampleBiotope06");
+        registerObjectRequest("HabitatModule", this, "Sample07", "LoadSampleBiotope07");
     }
 
     public EvolutionApplicationModule(NGComponent aOwner, String aName, String aDescription) {
@@ -87,6 +88,11 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
     public void LoadSampleBiotope06() {
         FHabitat.KillAll();
         FHabitat.addBiotope(new SampleBiotope06(), FEvolutionProcess);
+    }
+
+    public void LoadSampleBiotope07() {
+        FHabitat.KillAll();
+        FHabitat.addBiotope(new SampleBiotope07(), FEvolutionProcess);
     }
 
 }

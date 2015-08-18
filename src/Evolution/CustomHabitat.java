@@ -2,6 +2,7 @@ package Evolution;
 
 import Evolution.Biotopes.CustomBiotope;
 import Evolution.Creatures.*;
+import Evolution.Processes.CustomEvolutionProcess;
 import Uniwork.Base.NGComponent;
 import Uniwork.Misc.*;
 
@@ -125,7 +126,6 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         FCreatures.add(aCreature);
         if (FCells.size() > 0)
             AssignToCell(aCreature);
-        UpdateMaxCreatureCount();
     }
 
     protected void UnassignFromCell(CustomCreature aCreature) {

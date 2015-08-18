@@ -1,6 +1,7 @@
 package Evolution.Creatures;
 
 import Evolution.CustomHabitat;
+import Evolution.Processes.CustomEvolutionProcess;
 import Uniwork.Base.NGObject;
 import javafx.scene.paint.Color;
 

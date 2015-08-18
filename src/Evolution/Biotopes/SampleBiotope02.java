@@ -10,7 +10,7 @@ public class SampleBiotope02 extends CustomBiotope {
     public SampleBiotope02() {
         super();
         FName = "Sample02";
-        FDescription = "Toads & Octogone";
+        FDescription = "Toads & Octogone biotope";
         FColonies.add(new BlinkerColony(6.0, 6.0));
         FColonies.add(new ClockColony(12.0, 44.0));
         FColonies.add(new ToadColony(36.0, 24.0));
