@@ -9,30 +9,34 @@ import java.util.Iterator;
 public abstract class CustomEvolutionProcess extends NGObject {
 
     protected CustomHabitat FHabitat;
-    protected ArrayList<CustomCreature> FCreaturesBorn;
-    protected ArrayList<CustomCreature> FCreaturesDie;
+    protected ArrayList<CustomCreature> FCreaturesToBorn;
+    protected ArrayList<CustomCreature> FCreaturesToDie;
 
     protected void DoExecute() {
 
     }
 
-    protected void Born(CustomCreature aCreature) {
-        FCreaturesBorn.add(aCreature);
-    }
-
-    protected void Die(CustomCreature aCreature) {
-        for (CustomCreature creature : FCreaturesDie) {
+    protected void ToBorn(CustomCreature aCreature) {
+        for (CustomCreature creature : FCreaturesToBorn) {
             if (creature.equals(aCreature))
                 return;
         }
-        FCreaturesDie.add(aCreature);
+        FCreaturesToBorn.add(aCreature);
+    }
+
+    protected void ToDie(CustomCreature aCreature) {
+        for (CustomCreature creature : FCreaturesToDie) {
+            if (creature.equals(aCreature))
+                return;
+        }
+        FCreaturesToDie.add(aCreature);
     }
 
     public CustomEvolutionProcess(CustomHabitat aHabitat) {
         super();
         FHabitat = aHabitat;
-        FCreaturesBorn = new ArrayList<CustomCreature>();
-        FCreaturesDie = new ArrayList<CustomCreature>();
+        FCreaturesToBorn = new ArrayList<CustomCreature>();
+        FCreaturesToDie = new ArrayList<CustomCreature>();
     }
 
     public CustomHabitat getHabitat() {
@@ -40,8 +44,8 @@ public abstract class CustomEvolutionProcess extends NGObject {
     }
 
     public void Start() {
-        FCreaturesBorn.clear();
-        FCreaturesDie.clear();
+        FCreaturesToBorn.clear();
+        FCreaturesToDie.clear();
     }
 
     public void Execute() {
@@ -52,12 +56,12 @@ public abstract class CustomEvolutionProcess extends NGObject {
 
     }
 
-    public Iterator<CustomCreature> getCreaturesBorn() {
-        return FCreaturesBorn.iterator();
+    public Iterator<CustomCreature> getCreaturesToBorn() {
+        return FCreaturesToBorn.iterator();
     }
 
-    public Iterator<CustomCreature> getCreaturesDie() {
-        return FCreaturesDie.iterator();
+    public Iterator<CustomCreature> getCreaturesToDie() {
+        return FCreaturesToDie.iterator();
     }
 
 }

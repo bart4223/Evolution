@@ -1,13 +1,13 @@
 package Evolution.Graphics;
 
-import Evolution.Creatures.Creature2D;
+import Evolution.Creatures.Protozoa;
 import Evolution.Creatures.CustomCreature;
 import Evolution.Habitat2D;
 import Uniwork.Graphics.NGPoint2D;
 import Uniwork.Visuals.NGDisplayController;
 import javafx.scene.canvas.Canvas;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 
 public class Habitat2DDisplayController extends NGDisplayController {
 
@@ -21,11 +21,12 @@ public class Habitat2DDisplayController extends NGDisplayController {
     protected void DoRender() {
         super.DoRender();
         if (Habitat != null) {
-            Iterator<CustomCreature> itr = Habitat.getCreatures();
-            while (itr.hasNext()) {
-                Creature2D creature = (Creature2D)itr.next();
-                NGPoint2D pos = creature.getPosition();
-                drawPixel(pos.getXAsInt(), pos.getYAsInt(), creature.getColor());
+            ArrayList<CustomCreature> creatures = Habitat.getCreaturesAsArray();
+            for (CustomCreature creature : creatures) {
+                if (creature instanceof Protozoa) {
+                    NGPoint2D pos = ((Protozoa)creature).getPosition();
+                    drawPixel(pos.getXAsInt(), pos.getYAsInt(), creature.getColor());
+                }
             }
         }
     }

@@ -1,6 +1,6 @@
 package Evolution;
 
-import Evolution.Creatures.Creature2D;
+import Evolution.Creatures.Protozoa;
 import Evolution.Creatures.CustomEvolutionProcess;
 import Evolution.Creatures.GameOfLife2D;
 import Uniwork.Appl.NGCustomStageItem;
@@ -30,14 +30,15 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         CustomHabitat h = getHabitat();
         CustomEvolutionProcess ep = new GameOfLife2D(h);
         h.addEvolutionProcess(ep);
-        h.addCreature(new Creature2D(h, ep, 1, 2));
-        h.addCreature(new Creature2D(h, ep, 2, 1));
-        h.addCreature(new Creature2D(h, ep, 2, 2));
+        h.addCreature(new Protozoa(h, ep, 2, 1));
+        h.addCreature(new Protozoa(h, ep, 2, 2));
+        h.addCreature(new Protozoa(h, ep, 2, 3));
     }
 
     @Override
     protected void registerObjectRequests() {
         registerObjectRequest("Habitat", getHabitat(), "Next", "Evolution");
+        registerObjectRequest("Habitat", getHabitat(), "Repro", "ToggleReproduction");
     }
 
     public EvolutionApplicationModule(NGComponent aOwner, String aName, String aDescription) {

@@ -1,6 +1,6 @@
 package Evolution;
 
-import Evolution.Creatures.Creature2D;
+import Evolution.Creatures.Protozoa;
 import Evolution.Creatures.CustomCreature;
 import Uniwork.Base.NGComponent;
 import Uniwork.Graphics.NGPoint2D;
@@ -14,20 +14,20 @@ public class Habitat2D extends CustomHabitat implements NGLogEventListener {
 
     @Override
     protected void AssignToCell(CustomCreature aCreature) {
-        if (aCreature instanceof Creature2D) {
-            Creature2D creature = (Creature2D)aCreature;
+        if (aCreature instanceof Protozoa) {
+            Protozoa creature = (Protozoa)aCreature;
             NGPoint2D pos = creature.getPosition();
-            HabitatCell cell = FCells.get(pos.getYAsInt() + pos.getXAsInt());
+            HabitatCell cell = FCells.get(pos.getYAsInt() * FWidth + pos.getXAsInt());
             cell.setCreature(aCreature);
         }
     }
 
     @Override
     protected void UnassignFromCell(CustomCreature aCreature) {
-        if (aCreature instanceof Creature2D) {
-            Creature2D creature = (Creature2D)aCreature;
+        if (aCreature instanceof Protozoa) {
+            Protozoa creature = (Protozoa)aCreature;
             NGPoint2D pos = creature.getPosition();
-            HabitatCell cell = FCells.get(pos.getYAsInt() + pos.getXAsInt());
+            HabitatCell cell = FCells.get(pos.getYAsInt() * FWidth + pos.getXAsInt());
             cell.setCreature(null);
         }
     }

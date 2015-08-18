@@ -4,41 +4,66 @@ import Evolution.Creatures.CreatureEvent;
 import Evolution.Creatures.CustomCreature;
 import Evolution.Creatures.CustomEvolutionProcess;
 import Uniwork.Base.NGComponent;
-import Uniwork.Misc.NGLogEvent;
-import Uniwork.Misc.NGLogEventListener;
-import Uniwork.Misc.NGLogManager;
+import Uniwork.Misc.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public abstract class CustomHabitat extends NGComponent implements NGLogEventListener {
+public abstract class CustomHabitat extends NGComponent implements NGLogEventListener, NGTickListener {
 
     protected ArrayList<HabitatEventListener> FEventListeners;
     protected ArrayList<CustomEvolutionProcess> FEvolutionProcesses;
     protected ArrayList<CustomCreature> FCreatures;
     protected ArrayList<HabitatCell> FCells;
+    protected Integer FGenerationCount;
+    protected NGTickGenerator FTick;
 
     protected void InternalEvolution() {
         for (CustomEvolutionProcess ep : FEvolutionProcesses) {
-            ep.Start();
+            DoEvolutionStart(ep);
             try {
                 DoEvolution(ep);
             }
             finally {
-                ep.End();
+                DoEvolutionEnd(ep);
             }
         }
     }
 
+    protected void DoEvolutionStart(CustomEvolutionProcess aEvolutionProcess) {
+        raiseEvolutionStartEvent();
+        aEvolutionProcess.Start();
+    }
+
+    protected void DoEvolutionEnd(CustomEvolutionProcess aEvolutionProcess) {
+        aEvolutionProcess.End();
+        FGenerationCount++;
+        raiseEvolutionEndEvent();
+    }
+
     protected void DoEvolution(CustomEvolutionProcess aEvolutionProcess) {
         aEvolutionProcess.Execute();
-        Iterator<CustomCreature> itr = aEvolutionProcess.getCreaturesBorn();
+        Iterator<CustomCreature> itr = aEvolutionProcess.getCreaturesToBorn();
         while (itr.hasNext()) {
             addCreature(itr.next());
         }
-        itr = aEvolutionProcess.getCreaturesDie();
+        itr = aEvolutionProcess.getCreaturesToDie();
         while (itr.hasNext()) {
             removeCreature(itr.next());
+        }
+    }
+
+    protected synchronized void raiseEvolutionStartEvent() {
+        HabitatEvent event = new HabitatEvent(this);
+        for (HabitatEventListener listener : FEventListeners) {
+            listener.handleEvolutionStart(event);
+        }
+    }
+
+    protected synchronized void raiseEvolutionEndEvent() {
+        HabitatEvent event = new HabitatEvent(this);
+        for (HabitatEventListener listener : FEventListeners) {
+            listener.handleEvolutionEnd(event);
         }
     }
 
@@ -69,7 +94,14 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     @Override
     protected void DoInitialize() {
         super.DoInitialize();
+        FTick.Initialize();
         InitializeCells();
+    }
+
+    @Override
+    protected void DoFinalize() {
+        FTick.Finalize();
+        super.DoFinalize();
     }
 
     protected void AssignToCell(CustomCreature aCreature) {
@@ -87,7 +119,7 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     }
 
     protected void InternalremoveCreature(CustomCreature aCreature) {
-        FCreatures.add(aCreature);
+        FCreatures.remove(aCreature);
         if (FCells.size() > 0)
             UnassignFromCell(aCreature);
     }
@@ -96,10 +128,25 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         super(aOwner, aName);
         FLogManager = new NGLogManager();
         FLogManager.addEventListener(this);
+        FTick = new NGTickGenerator(10);
+        FTick.NewItem("Main", 20);
+        FTick.addListener("Main", this);
         FEventListeners = new ArrayList<HabitatEventListener>();
         FCells = new ArrayList<HabitatCell>();
         FCreatures = new ArrayList<CustomCreature>();
         FEvolutionProcesses = new ArrayList<CustomEvolutionProcess>();
+        Reset();
+    }
+
+    public void Reset() {
+        FGenerationCount = 0;
+        removeCreatures();
+    }
+
+    public void removeCreatures() {
+        for (CustomCreature creature : FCreatures) {
+            removeCreature(creature);
+        }
     }
 
     public void addEventListener(HabitatEventListener aListener)  {
@@ -117,13 +164,13 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     public void addCreature(CustomCreature aCreature) {
         InternaladdCreature(aCreature);
         raiseCreatureAddedEvent(aCreature);
-        writeInfo(String.format("Creature born [%s]", aCreature.getInfo()));
+        writeInfo(10, String.format("Creature born [%s]", aCreature.getInfo()));
     }
 
     public void removeCreature(CustomCreature aCreature) {
-        FCreatures.remove(aCreature);
+        InternalremoveCreature(aCreature);
         raiseCreatureRemovedEvent(aCreature);
-        writeInfo(String.format("Creature died [%s]", aCreature.getInfo()));
+        writeInfo(10, String.format("Creature died [%s]", aCreature.getInfo()));
     }
 
     public void Evolution() {
@@ -134,8 +181,24 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         return FCreatures.iterator();
     }
 
+    public ArrayList<CustomCreature> getCreaturesAsArray() {
+        ArrayList<CustomCreature> res = new ArrayList<CustomCreature>();
+        for (CustomCreature creature : FCreatures) {
+            res.add(creature);
+        }
+        return res;
+    }
+
     public ArrayList<HabitatCell> getCells() {
         return FCells;
+    }
+
+    public Integer getCreatuesCount() {
+        return FCreatures.size();
+    }
+
+    public Integer getGenerationCount() {
+        return FGenerationCount;
     }
 
     @Override
@@ -146,6 +209,17 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     @Override
     public void handleClearLog() {
 
+    }
+
+    @Override
+    public void handleTick(NGTickEvent e) {
+        if (e.Name.equals("Main")) {
+            Evolution();
+        }
+    }
+
+    public void ToggleReproduction() {
+        FTick.SetItemEnabled("Main", !FTick.GetItemEnabled("Main"));
     }
 
 }

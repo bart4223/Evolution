@@ -15,6 +15,18 @@ public class HabitatStageItem extends NGCustomStageItem implements HabitatEventL
     }
 
     @Override
+    public void handleEvolutionStart(HabitatEvent e) {
+        HabitatStageController sc = (HabitatStageController)FStageController;
+        sc.UpdateHabitatInfo(e.getHabitat());
+    }
+
+    @Override
+    public void handleEvolutionEnd(HabitatEvent e) {
+        HabitatStageController sc = (HabitatStageController)FStageController;
+        sc.UpdateHabitatInfo(e.getHabitat());
+    }
+
+    @Override
     public void handleCreatureAdded(CreatureEvent e) {
         HabitatStageController sc = (HabitatStageController)FStageController;
         sc.addCreature(e.getHabitat(), e.getCreature());
