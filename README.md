@@ -1,7 +1,7 @@
 Evolution
 =========
 
-The project visualize same evolution algorithm (like GameOfLife) with uniwork...
+The project visualize same evolution algorithm (like GameOfLife).
 
 Configuration
 =============
