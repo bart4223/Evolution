@@ -3,7 +3,6 @@ package Evolution;
 import Evolution.Biotopes.CustomBiotope;
 import Evolution.Creatures.*;
 import Uniwork.Base.NGComponent;
-import Uniwork.Graphics.NGPoint2D;
 import Uniwork.Misc.*;
 
 import java.util.ArrayList;
@@ -16,6 +15,7 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     protected ArrayList<CustomCreature> FCreatures;
     protected ArrayList<HabitatCell> FCells;
     protected Integer FGenerationCount;
+    protected Integer FMaxCreatureCount;
     protected NGTickGenerator FTick;
 
     protected void InternalEvolution() {
@@ -35,9 +35,15 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         aEvolutionProcess.Start();
     }
 
+    protected void UpdateMaxCreatureCount() {
+        if (FCreatures.size() > FMaxCreatureCount)
+            FMaxCreatureCount = FCreatures.size();
+    }
+
     protected void DoEvolutionEnd(CustomEvolutionProcess aEvolutionProcess) {
         aEvolutionProcess.End();
         FGenerationCount++;
+        UpdateMaxCreatureCount();
         raiseEvolutionEndEvent();
     }
 
@@ -119,6 +125,7 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         FCreatures.add(aCreature);
         if (FCells.size() > 0)
             AssignToCell(aCreature);
+        UpdateMaxCreatureCount();
     }
 
     protected void UnassignFromCell(CustomCreature aCreature) {
@@ -143,11 +150,13 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         FCreatures = new ArrayList<CustomCreature>();
         FEvolutionProcesses = new ArrayList<CustomEvolutionProcess>();
         FGenerationCount = 0;
+        FMaxCreatureCount = 0;
     }
 
     public synchronized void KillAll() {
         FTick.SetItemEnabled("Main", false);
         FGenerationCount = 0;
+        FMaxCreatureCount = 0;
         removeAllCreatures();
         raiseKillAllEvent();
     }
@@ -202,6 +211,10 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
 
     public Integer getCreatuesCount() {
         return FCreatures.size();
+    }
+
+    public Integer getMaxCreatuesCount() {
+        return FMaxCreatureCount;
     }
 
     public Integer getGenerationCount() {

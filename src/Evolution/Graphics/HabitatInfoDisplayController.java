@@ -21,8 +21,9 @@ public class HabitatInfoDisplayController extends NGDisplayController {
             FGC.clearRect(0, 0, FCanvas.getWidth(), FCanvas.getHeight());
             FGC.setStroke(Color.BLACK);
             FGC.setFont(new Font("Arial", 12));
-            FGC.strokeText(String.format("Creatures %d", Habitat.getCreatuesCount()), 700, 770);
-            FGC.strokeText(String.format("Generations %d", Habitat.getGenerationCount()), 700, 790);
+            FGC.strokeText(String.format("Creatures %d", Habitat.getCreatuesCount()), 670, 750);
+            FGC.strokeText(String.format("Max Creatures %d", Habitat.getMaxCreatuesCount()), 670, 770);
+            FGC.strokeText(String.format("Generations %d", Habitat.getGenerationCount()), 670, 790);
         }
     }
 
