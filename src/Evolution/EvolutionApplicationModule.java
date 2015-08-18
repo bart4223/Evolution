@@ -1,6 +1,7 @@
 package Evolution;
 
-import Evolution.Creatures.Protozoa;
+import Evolution.Creatures.BlinkerColony;
+import Evolution.Creatures.ClockColony;
 import Evolution.Creatures.CustomEvolutionProcess;
 import Evolution.Creatures.GameOfLife2D;
 import Uniwork.Appl.NGCustomStageItem;
@@ -30,9 +31,10 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         CustomHabitat h = getHabitat();
         CustomEvolutionProcess ep = new GameOfLife2D(h);
         h.addEvolutionProcess(ep);
-        h.addCreature(new Protozoa(h, ep, 2, 1));
-        h.addCreature(new Protozoa(h, ep, 2, 2));
-        h.addCreature(new Protozoa(h, ep, 2, 3));
+        h.addCellColony(new BlinkerColony(1.0, 1.0), ep);
+        h.addCellColony(new BlinkerColony(5.0, 10.0), ep);
+        h.addCellColony(new BlinkerColony(20.0, 20.0), ep);
+        h.addCellColony(new ClockColony(20.0, 8.0), ep);
     }
 
     @Override

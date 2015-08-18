@@ -1,9 +1,8 @@
 package Evolution;
 
-import Evolution.Creatures.CreatureEvent;
-import Evolution.Creatures.CustomCreature;
-import Evolution.Creatures.CustomEvolutionProcess;
+import Evolution.Creatures.*;
 import Uniwork.Base.NGComponent;
+import Uniwork.Graphics.NGPoint2D;
 import Uniwork.Misc.*;
 
 import java.util.ArrayList;
@@ -181,11 +180,8 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         return FCreatures.iterator();
     }
 
-    public ArrayList<CustomCreature> getCreaturesAsArray() {
-        ArrayList<CustomCreature> res = new ArrayList<CustomCreature>();
-        for (CustomCreature creature : FCreatures) {
-            res.add(creature);
-        }
+    public synchronized ArrayList<CustomCreature> getCreaturesAsArray() {
+        ArrayList<CustomCreature> res = (ArrayList<CustomCreature>)FCreatures.clone();
         return res;
     }
 
@@ -220,6 +216,10 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
 
     public void ToggleReproduction() {
         FTick.SetItemEnabled("Main", !FTick.GetItemEnabled("Main"));
+    }
+
+    public void addCellColony(CustomCellColony aCellColony, CustomEvolutionProcess aEvolutionProcess) {
+
     }
 
 }

@@ -1,7 +1,6 @@
 package Evolution;
 
-import Evolution.Creatures.Protozoa;
-import Evolution.Creatures.CustomCreature;
+import Evolution.Creatures.*;
 import Uniwork.Base.NGComponent;
 import Uniwork.Graphics.NGPoint2D;
 import Uniwork.Misc.NGLogEvent;
@@ -51,6 +50,16 @@ public class Habitat2D extends CustomHabitat implements NGLogEventListener {
 
     public Integer getHeight() {
         return FHeight;
+    }
+
+
+    @Override
+    public void addCellColony(CustomCellColony aCellColony, CustomEvolutionProcess aEvolutionProcess) {
+        if (aCellColony instanceof CellColony2D) {
+            for (NGPoint2D pos : ((CellColony2D)aCellColony).getPoints()) {
+                addCreature(new Protozoa(this, aEvolutionProcess, pos.getXAsInt(), pos.getYAsInt()));
+            }
+        }
     }
 
     @Override
