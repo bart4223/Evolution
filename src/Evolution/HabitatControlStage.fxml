@@ -2,14 +2,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <AnchorPane fx:controller="Evolution.HabitatControlStageController" xmlns:fx="http://javafx.com/fxml" >
     <HBox prefHeight="50" minWidth="800" alignment="TOP_LEFT" spacing="10" xmlns:fx="http://javafx.com/fxml" style="-fx-background-color: darkgray;">
         <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
         <Button id="btnRepro" prefWidth="80" text="Repro" onAction="#handleRepro" fx:id="btnRepro" />
         <Button id="btnNext" prefWidth="80" text="Next" onAction="#handleNext" fx:id="btnNext" />
         <Button id="btnKill" prefWidth="80" text="Kill" onAction="#handleKill" fx:id="btnKill" />
-        <Button id="btnSample01" prefWidth="100" text="Sample 01" onAction="#handleSample01" fx:id="btnSample01" />
-        <Button id="btnSample02" prefWidth="100" text="Sample 02" onAction="#handleSample02" fx:id="btnSample02" />
-        <Button id="btnSample03" prefWidth="100" text="Sample 03" onAction="#handleSample03" fx:id="btnSample03" />
+        <ComboBox id="cbSamples" prefWidth="200" onAction="#handlecbSamples" fx:id="cbSamples" />
+        <Button id="btnReloead" prefWidth="20" text="..." onAction="#handleReload" fx:id="btnReload" />
     </HBox>
 </AnchorPane>

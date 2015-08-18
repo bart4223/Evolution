@@ -2,9 +2,14 @@ package Evolution;
 
 import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Visuals.NGStageController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 
 public class HabitatControlStageController extends NGStageController {
+
+    @FXML
+    private ComboBox cbSamples;
 
     @FXML
     protected void handleNext(){
@@ -22,18 +27,26 @@ public class HabitatControlStageController extends NGStageController {
     }
 
     @FXML
-    protected void handleSample01(){
-        Invoke("HabitatModule", "Sample01");
+    protected void handleReload() {
+        if (cbSamples.getValue() != null) {
+            Invoke("HabitatModule", cbSamples.getValue().toString());
+        }
     }
 
-    @FXML
-    protected void handleSample02(){
-        Invoke("HabitatModule", "Sample02");
+    public void handlecbSamples(ActionEvent actionEvent) {
+        if (actionEvent.getEventType().equals(ActionEvent.ACTION)) {
+            if (cbSamples.getValue() != null) {
+                Invoke("HabitatModule", cbSamples.getValue().toString());
+            }
+        }
     }
-
-    @FXML
-    protected void handleSample03(){
-        Invoke("HabitatModule", "Sample03");
+    protected void DoInitialize() {
+        super.DoInitialize();
+        cbSamples.getItems().add("Sample01");
+        cbSamples.getItems().add("Sample02");
+        cbSamples.getItems().add("Sample03");
+        cbSamples.getItems().add("Sample04");
+        cbSamples.getItems().add("Sample05");
     }
 
     public HabitatControlStageController() {
