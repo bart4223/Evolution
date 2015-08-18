@@ -1,5 +1,6 @@
 package Evolution;
 
+import Evolution.Biotopes.CustomBiotope;
 import Evolution.Creatures.*;
 import Uniwork.Base.NGComponent;
 import Uniwork.Graphics.NGPoint2D;
@@ -229,7 +230,19 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     }
 
     public void addCellColony(CustomCellColony aCellColony, CustomEvolutionProcess aEvolutionProcess) {
+        writeInfo(5, String.format("Cell colony \"%s\" with evolution process \"%s\" added", aCellColony.getInfo(), aEvolutionProcess.getInfo()));
+    }
 
+    public void addBiotope(CustomBiotope aBiotope, CustomEvolutionProcess aEvolutionProcess) {
+        writeInfo(5, String.format("Add biotope \"%s\" with evolution process \"%s\"", aBiotope.getInfo(), aEvolutionProcess.getInfo()));
+        Iterator<CustomCellColony> itr = aBiotope.getColonies();
+        while (itr.hasNext()) {
+            addCellColony(itr.next(), aEvolutionProcess);
+        }
+    }
+
+    public void setLogLevel(Integer aLogLevel) {
+        FLogManager.setLogLevel(aLogLevel);
     }
 
 }

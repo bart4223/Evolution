@@ -17,6 +17,7 @@ public class BlinkerColony extends CellColony2D {
 
     public BlinkerColony(Double aX, Double aY) {
         super(aX, aY);
+        FName = "Blinker";
     }
 
 }

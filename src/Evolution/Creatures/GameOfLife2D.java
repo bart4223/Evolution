@@ -79,6 +79,7 @@ public class GameOfLife2D extends CustomEvolutionProcess {
         super(aHabitat);
         FWidth = ((Habitat2D)FHabitat).getWidth();
         FHeight = ((Habitat2D)FHabitat).getHeight();
+        FName = "Game of Life";
     }
 
 }

@@ -8,5 +8,6 @@
         <Button id="btnRepro" prefWidth="80" text="Repro" onAction="#handleRepro" fx:id="btnRepro" />
         <Button id="btnNext" prefWidth="80" text="Next" onAction="#handleNext" fx:id="btnNext" />
         <Button id="btnKill" prefWidth="80" text="Kill" onAction="#handleKill" fx:id="btnKill" />
+        <Button id="btnSample01" prefWidth="100" text="Sample 01" onAction="#handleSample01" fx:id="btnSample01" />
     </HBox>
 </AnchorPane>

@@ -20,6 +20,7 @@ public class ClockColony extends CellColony2D {
 
     public ClockColony(Double aX, Double aY) {
         super(aX, aY);
+        FName = "Clock";
     }
 
 }

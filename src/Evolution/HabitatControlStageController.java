@@ -21,6 +21,11 @@ public class HabitatControlStageController extends NGStageController {
         Invoke("Habitat", "Kill");
     }
 
+    @FXML
+    protected void handleSample01(){
+        Invoke("HabitatModule", "Sample01");
+    }
+
     public HabitatControlStageController() {
         this(null);
     }

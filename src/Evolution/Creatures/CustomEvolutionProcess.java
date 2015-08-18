@@ -11,6 +11,7 @@ public abstract class CustomEvolutionProcess extends NGObject {
     protected CustomHabitat FHabitat;
     protected ArrayList<CustomCreature> FCreaturesToBorn;
     protected ArrayList<CustomCreature> FCreaturesToDie;
+    protected String FName;
 
     protected void DoExecute() {
 
@@ -54,6 +55,10 @@ public abstract class CustomEvolutionProcess extends NGObject {
 
     public void End() {
 
+    }
+
+    public String getInfo() {
+        return FName;
     }
 
     public Iterator<CustomCreature> getCreaturesToBorn() {

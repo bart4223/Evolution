@@ -1,9 +1,9 @@
 package Evolution;
 
-import Evolution.Creatures.BlinkerColony;
-import Evolution.Creatures.ClockColony;
+import Evolution.Biotopes.SampleBiotope01;
 import Evolution.Creatures.CustomEvolutionProcess;
 import Evolution.Creatures.GameOfLife2D;
+import Uniwork.Appl.NGApplication;
 import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Appl.NGVisualApplicationModule;
 import Uniwork.Base.NGComponent;
@@ -11,6 +11,7 @@ import Uniwork.Base.NGComponent;
 public class EvolutionApplicationModule extends NGVisualApplicationModule {
 
     protected CustomHabitat FHabitat;
+    protected CustomEvolutionProcess FEvolutionProcess;
 
     @Override
     protected void DoBeforeInitialize() {
@@ -24,18 +25,12 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         getHabitat().addEventListener((HabitatEventListener)item);
     }
 
-    @Override
-    protected void DoAfterInitialize() {
-        super.DoAfterInitialize();
-        // ToDo
-        CustomHabitat h = getHabitat();
-        CustomEvolutionProcess ep = new GameOfLife2D(h);
-        h.addEvolutionProcess(ep);
-        h.addCellColony(new BlinkerColony(1.0, 1.0), ep);
-        h.addCellColony(new BlinkerColony(5.0, 10.0), ep);
-        h.addCellColony(new BlinkerColony(20.0, 20.0), ep);
-        h.addCellColony(new ClockColony(20.0, 8.0), ep);
-        h.addCellColony(new ClockColony(30.0, 33.0), ep);
+    protected void CreateHabitat() {
+        FHabitat = new Habitat2D(this, EvolutionConsts.C_COMPONENT_HABITAT, 40, 40);
+        FHabitat.setLogLevel(NGApplication.Application.getLogManager().getLogLevel());
+        FEvolutionProcess = new GameOfLife2D(FHabitat);
+        FHabitat.addEvolutionProcess(FEvolutionProcess);
+        FComponentManager.registerComponent(FHabitat);
     }
 
     @Override
@@ -43,12 +38,12 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         registerObjectRequest("Habitat", getHabitat(), "Next", "Evolution");
         registerObjectRequest("Habitat", getHabitat(), "Repro", "ToggleReproduction");
         registerObjectRequest("Habitat", getHabitat(), "Kill", "KillAll");
+        registerObjectRequest("HabitatModule", this, "Sample01", "LoadSampleBiotope01");
     }
 
     public EvolutionApplicationModule(NGComponent aOwner, String aName, String aDescription) {
         super(aOwner, aName, aDescription);
-        // ToDo
-        FComponentManager.registerComponent(new Habitat2D(this, EvolutionConsts.C_COMPONENT_HABITAT, 40, 40));
+        CreateHabitat();
         FStageManager.registerItemClass("Control", "Evolution.HabitatControlStageItem");
         FStageManager.registerItemClass("Habitat", "Evolution.HabitatStageItem");
     }
@@ -57,6 +52,10 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         if (FHabitat == null)
             FHabitat = (CustomHabitat)FComponentManager.getComponent(EvolutionConsts.C_COMPONENT_HABITAT);
         return FHabitat;
+    }
+
+    public void LoadSampleBiotope01() {
+        FHabitat.addBiotope(new SampleBiotope01(), FEvolutionProcess);
     }
 
 }

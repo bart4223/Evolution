@@ -19,4 +19,9 @@ public class CellColony2D extends CustomCellColony {
         FY = aY;
     }
 
+    @Override
+    public String getInfo() {
+        return String.format("%s [%.0f/%.0f]", super.getInfo(), FX, FY);
+    }
+
 }

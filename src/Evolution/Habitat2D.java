@@ -55,6 +55,7 @@ public class Habitat2D extends CustomHabitat implements NGLogEventListener {
 
     @Override
     public void addCellColony(CustomCellColony aCellColony, CustomEvolutionProcess aEvolutionProcess) {
+        super.addCellColony(aCellColony, aEvolutionProcess);
         if (aCellColony instanceof CellColony2D) {
             for (NGPoint2D pos : ((CellColony2D)aCellColony).getPoints()) {
                 addCreature(new Protozoa(this, aEvolutionProcess, pos.getXAsInt(), pos.getYAsInt()));
