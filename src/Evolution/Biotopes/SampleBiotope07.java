@@ -10,9 +10,9 @@ public class SampleBiotope07 extends CustomBiotope {
         FName = "Sample07";
         FDescription = "The random biotope";
         NGRandomGenerator rd = new NGRandomGenerator();
-        Integer count = rd.getInteger(50, 100);
+        Integer count = rd.getInteger(100, 200);
         for (int i = 0; i < count; i++) {
-            FColonies.add(new SimpleColony(rd.getInteger(79).doubleValue(), rd.getInteger(79).doubleValue()));
+            FColonies.add(new SimpleColony(rd.getInteger(20, 60).doubleValue(), rd.getInteger(20, 60).doubleValue()));
         }
     }
 

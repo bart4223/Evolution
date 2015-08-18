@@ -242,6 +242,10 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         FTick.SetItemEnabled("Main", !FTick.GetItemEnabled("Main"));
     }
 
+    public Boolean IsInReproduction() {
+        return FTick.GetItemEnabled("Main");
+    }
+
     public void addCellColony(CustomCellColony aCellColony, CustomEvolutionProcess aEvolutionProcess) {
         writeInfo(5, String.format("Cell colony \"%s\" with evolution process \"%s\" added", aCellColony.getInfo(), aEvolutionProcess.getInfo()));
     }

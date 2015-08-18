@@ -33,6 +33,14 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         FComponentManager.registerComponent(FHabitat);
     }
 
+    protected void LoadSampleBiotope(CustomBiotope aBiotope) {
+        Boolean ir = FHabitat.IsInReproduction();
+        FHabitat.KillAll();
+        FHabitat.addBiotope(aBiotope, FEvolutionProcess);
+        if (ir)
+            FHabitat.ToggleReproduction();
+    }
+
     @Override
     protected void registerObjectRequests() {
         registerObjectRequest("Habitat", getHabitat(), "Next", "Evolution");
@@ -61,38 +69,31 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
     }
 
     public void LoadSampleBiotope01() {
-        FHabitat.KillAll();
-        FHabitat.addBiotope(new SampleBiotope01(), FEvolutionProcess);
+        LoadSampleBiotope(new SampleBiotope01());
     }
 
     public void LoadSampleBiotope02() {
-        FHabitat.KillAll();
-        FHabitat.addBiotope(new SampleBiotope02(), FEvolutionProcess);
+        LoadSampleBiotope(new SampleBiotope02());
     }
 
     public void LoadSampleBiotope03() {
-        FHabitat.KillAll();
-        FHabitat.addBiotope(new SampleBiotope03(), FEvolutionProcess);
+        LoadSampleBiotope(new SampleBiotope03());
     }
 
     public void LoadSampleBiotope04() {
-        FHabitat.KillAll();
-        FHabitat.addBiotope(new SampleBiotope04(), FEvolutionProcess);
+        LoadSampleBiotope(new SampleBiotope04());
     }
 
     public void LoadSampleBiotope05() {
-        FHabitat.KillAll();
-        FHabitat.addBiotope(new SampleBiotope05(), FEvolutionProcess);
+        LoadSampleBiotope(new SampleBiotope05());
     }
 
     public void LoadSampleBiotope06() {
-        FHabitat.KillAll();
-        FHabitat.addBiotope(new SampleBiotope06(), FEvolutionProcess);
+        LoadSampleBiotope(new SampleBiotope06());
     }
 
     public void LoadSampleBiotope07() {
-        FHabitat.KillAll();
-        FHabitat.addBiotope(new SampleBiotope07(), FEvolutionProcess);
+        LoadSampleBiotope(new SampleBiotope07());
     }
 
 }
