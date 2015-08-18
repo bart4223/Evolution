@@ -26,7 +26,7 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
     }
 
     protected void CreateHabitat() {
-        FHabitat = new Habitat2D(this, EvolutionConsts.C_COMPONENT_HABITAT, 40, 40);
+        FHabitat = new Habitat2D(this, EvolutionConsts.C_COMPONENT_HABITAT, 80, 80);
         FHabitat.setLogLevel(NGApplication.Application.getLogManager().getLogLevel());
         FEvolutionProcess = new GameOfLife2D(FHabitat);
         FHabitat.addEvolutionProcess(FEvolutionProcess);
@@ -43,6 +43,7 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         registerObjectRequest("HabitatModule", this, "Sample03", "LoadSampleBiotope03");
         registerObjectRequest("HabitatModule", this, "Sample04", "LoadSampleBiotope04");
         registerObjectRequest("HabitatModule", this, "Sample05", "LoadSampleBiotope05");
+        registerObjectRequest("HabitatModule", this, "Sample06", "LoadSampleBiotope06");
     }
 
     public EvolutionApplicationModule(NGComponent aOwner, String aName, String aDescription) {
@@ -81,6 +82,11 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
     public void LoadSampleBiotope05() {
         FHabitat.KillAll();
         FHabitat.addBiotope(new SampleBiotope05(), FEvolutionProcess);
+    }
+
+    public void LoadSampleBiotope06() {
+        FHabitat.KillAll();
+        FHabitat.addBiotope(new SampleBiotope06(), FEvolutionProcess);
     }
 
 }

@@ -7,12 +7,13 @@ public class SampleBiotope03 extends CustomBiotope {
     public SampleBiotope03() {
         super();
         FName = "Sample03";
-        FColonies.add(new BipoleColony(3.0, 1.0));
-        FColonies.add(new TripoleColony(25.0, 5.0));
-        FColonies.add(new BlinkerColony(5.0, 14.0));
-        FColonies.add(new ToadColony(35.0, 20.0));
-        FColonies.add(new PulsatorColony(10.0, 8.0));
-        FColonies.add(new PorpoiseColony(14.0, 25.0));
+        FDescription = "Bipole, Tripole, Pulsator & Porpoise";
+        FColonies.add(new BipoleColony(6.0, 2.0));
+        FColonies.add(new TripoleColony(50.0, 10.0));
+        FColonies.add(new BlinkerColony(10.0, 28.0));
+        FColonies.add(new ToadColony(70.0, 30.0));
+        FColonies.add(new PulsatorColony(20.0, 16.0));
+        FColonies.add(new PorpoiseColony(28.0, 50.0));
     }
 
 }

@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
 
 public class HabitatStageController extends NGStageController {
 
-    protected Integer FPixelSize = 20;
+    protected Integer FPixelSize = 10;
 
     @FXML
     private Canvas Layer0;
