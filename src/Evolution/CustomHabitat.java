@@ -52,6 +52,13 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         }
     }
 
+    protected synchronized void raiseKillAllEvent() {
+        HabitatEvent event = new HabitatEvent(this);
+        for (HabitatEventListener listener : FEventListeners) {
+            listener.handleKillAll(event);
+        }
+    }
+
     protected synchronized void raiseEvolutionStartEvent() {
         HabitatEvent event = new HabitatEvent(this);
         for (HabitatEventListener listener : FEventListeners) {
@@ -134,17 +141,19 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         FCells = new ArrayList<HabitatCell>();
         FCreatures = new ArrayList<CustomCreature>();
         FEvolutionProcesses = new ArrayList<CustomEvolutionProcess>();
-        Reset();
-    }
-
-    public void Reset() {
         FGenerationCount = 0;
-        removeCreatures();
     }
 
-    public void removeCreatures() {
-        for (CustomCreature creature : FCreatures) {
-            removeCreature(creature);
+    public synchronized void KillAll() {
+        FTick.SetItemEnabled("Main", false);
+        FGenerationCount = 0;
+        removeAllCreatures();
+        raiseKillAllEvent();
+    }
+
+    public void removeAllCreatures() {
+        while (FCreatures.size() > 0) {
+            removeCreature(FCreatures.get(0));
         }
     }
 
@@ -173,7 +182,8 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     }
 
     public void Evolution() {
-        InternalEvolution();
+        if (FCreatures.size() > 0)
+            InternalEvolution();
     }
 
     public Iterator<CustomCreature> getCreatures() {

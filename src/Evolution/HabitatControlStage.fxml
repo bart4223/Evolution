@@ -7,5 +7,6 @@
         <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
         <Button id="btnRepro" prefWidth="80" text="Repro" onAction="#handleRepro" fx:id="btnRepro" />
         <Button id="btnNext" prefWidth="80" text="Next" onAction="#handleNext" fx:id="btnNext" />
+        <Button id="btnKill" prefWidth="80" text="Kill" onAction="#handleKill" fx:id="btnKill" />
     </HBox>
 </AnchorPane>

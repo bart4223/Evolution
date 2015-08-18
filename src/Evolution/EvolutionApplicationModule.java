@@ -35,12 +35,14 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         h.addCellColony(new BlinkerColony(5.0, 10.0), ep);
         h.addCellColony(new BlinkerColony(20.0, 20.0), ep);
         h.addCellColony(new ClockColony(20.0, 8.0), ep);
+        h.addCellColony(new ClockColony(30.0, 33.0), ep);
     }
 
     @Override
     protected void registerObjectRequests() {
         registerObjectRequest("Habitat", getHabitat(), "Next", "Evolution");
         registerObjectRequest("Habitat", getHabitat(), "Repro", "ToggleReproduction");
+        registerObjectRequest("Habitat", getHabitat(), "Kill", "KillAll");
     }
 
     public EvolutionApplicationModule(NGComponent aOwner, String aName, String aDescription) {
