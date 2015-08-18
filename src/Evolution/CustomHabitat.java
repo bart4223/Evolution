@@ -182,7 +182,7 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         writeInfo(10, String.format("Creature died [%s]", aCreature.getInfo()));
     }
 
-    public void Evolution() {
+    public synchronized void Evolution() {
         if (FCreatures.size() > 0)
             InternalEvolution();
     }
