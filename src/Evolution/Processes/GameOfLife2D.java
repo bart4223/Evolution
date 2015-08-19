@@ -58,9 +58,6 @@ public class GameOfLife2D extends CustomEvolutionProcess {
         for (int y = 0; y < FHeight; y++) {
             for (int x = 0; x < FWidth; x++) {
                 int neighborCount = getNeighborCount(x, y);
-                if (neighborCount > 0) {
-                    //System.out.println(String.format("%d[%d,%d]", neighborCount, x, y));
-                }
                 HabitatCell cell = cells.get(y * FWidth + x);
                 CustomCreature creature = cell.getCreature();
                 if (creature == null) {
