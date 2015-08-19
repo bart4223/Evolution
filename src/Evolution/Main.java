@@ -1,6 +1,7 @@
 package Evolution;
 
 import Uniwork.Appl.NGApplication;
+import Uniwork.Appl.NGCustomApplicationModule;
 
 public class Main extends NGApplication {
 
@@ -30,7 +31,7 @@ public class Main extends NGApplication {
     }
 
     public void addEvolutionModule() {
-        addModule(EvolutionApplicationModule.class, true);
+        NGCustomApplicationModule module = addModule(EvolutionApplicationModule.class, true, String.format("%d",FModuleManager.getModuleCount()));
     }
 
 }

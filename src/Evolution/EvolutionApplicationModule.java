@@ -17,10 +17,10 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
     protected void DoBeforeInitialize() {
         super.DoBeforeInitialize();
         NGCustomStageItem item = FStageManager.addStageItem("Control");
-        item.setCaption(String.format("%s.Control", FName));
+        item.setCaption(String.format("%s.Control", getDescription()));
         item.setPosition(1500, 200);
         item = FStageManager.addStageItem("Habitat");
-        item.setCaption(String.format("%s.Habitat", FName));
+        item.setCaption(String.format("%s.Habitat", getDescription()));
         item.setPosition(1500, 300);
         getHabitat().addEventListener((HabitatEventListener)item);
     }
@@ -55,8 +55,8 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         registerObjectRequest("HabitatModule", this, "Sample07", "LoadSampleBiotope07");
     }
 
-    public EvolutionApplicationModule(NGComponent aOwner, String aName, String aDescription) {
-        super(aOwner, aName, aDescription);
+    public EvolutionApplicationModule(NGComponent aOwner, String aName) {
+        super(aOwner, aName);
         CreateHabitat();
         FStageManager.registerItemClass("Control", "Evolution.HabitatControlStageItem");
         FStageManager.registerItemClass("Habitat", "Evolution.HabitatStageItem");

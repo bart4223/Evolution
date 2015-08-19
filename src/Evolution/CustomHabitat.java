@@ -251,7 +251,7 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     }
 
     public void addBiotope(CustomBiotope aBiotope, CustomEvolutionProcess aEvolutionProcess) {
-        writeInfo(5, String.format("Add biotope \"%s\" with evolution process \"%s\"", aBiotope.getInfo(), aEvolutionProcess.getInfo()));
+        writeInfo(5, String.format("Add biotope %s with evolution process \"%s\"", aBiotope.getInfo(), aEvolutionProcess.getInfo()));
         Iterator<CustomCellColony> itr = aBiotope.getColonies();
         while (itr.hasNext()) {
             addCellColony(itr.next(), aEvolutionProcess);
