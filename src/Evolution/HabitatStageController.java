@@ -62,6 +62,7 @@ public class HabitatStageController extends NGStageController {
         }
     }
 
+    @Override
     protected void DoInitialize() {
         super.DoInitialize();
         LayerTop.addEventHandler(MouseEvent.MOUSE_PRESSED,
