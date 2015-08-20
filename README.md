@@ -16,4 +16,4 @@ Version history
     14.08.15    Start implementation
     18.08.15    First running cell evolution
     19.08.15    Many cell colonies and sample biotopes
-    20.08.15    Dynamic sample call
+    20.08.15    Dynamic sample call and manual creatures

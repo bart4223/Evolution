@@ -53,13 +53,14 @@ public class Habitat2D extends CustomHabitat implements NGLogEventListener {
         return FHeight;
     }
 
-
     @Override
     public void addCellColony(CustomCellColony aCellColony, CustomEvolutionProcess aEvolutionProcess) {
-        super.addCellColony(aCellColony, aEvolutionProcess);
         if (aCellColony instanceof CellColony2D) {
             for (NGPoint2D pos : ((CellColony2D)aCellColony).getPoints()) {
-                addCreature(new Protozoa(this, aEvolutionProcess, pos.getXAsInt(), pos.getYAsInt()));
+                if (!IsCellBusy(pos.getX(), pos.getY())) {
+                    addCreature(new Protozoa(this, aEvolutionProcess, pos.getXAsInt(), pos.getYAsInt()));
+                    super.addCellColony(aCellColony, aEvolutionProcess);
+                }
             }
         }
     }
@@ -72,6 +73,18 @@ public class Habitat2D extends CustomHabitat implements NGLogEventListener {
     @Override
     public void handleClearLog() {
 
+    }
+
+    public Boolean IsCellBusy(Double aX, Double aY) {
+        for (CustomCreature creature : FCreatures) {
+            if (creature instanceof Protozoa) {
+                NGPoint2D pos = ((Protozoa)creature).getPosition();
+                Boolean busy = (pos.getX() == aX && pos.getY() == aY);
+                if (busy)
+                    return true;
+            }
+        }
+        return false;
     }
 
 }

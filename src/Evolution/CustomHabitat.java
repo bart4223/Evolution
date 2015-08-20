@@ -262,4 +262,8 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         FLogManager.setLogLevel(aLogLevel);
     }
 
+    public Boolean InReproduction() {
+        return FTick.GetItemEnabled("Main");
+    }
+
 }

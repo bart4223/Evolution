@@ -4,12 +4,17 @@ import Evolution.Creatures.CustomCreature;
 import Evolution.Graphics.Habitat2DDisplayController;
 import Evolution.Graphics.HabitatInfoDisplayController;
 import Uniwork.Appl.NGCustomStageItem;
+import Uniwork.Base.NGObjectRequestItem;
 import Uniwork.Visuals.NGDisplayView;
 import Uniwork.Visuals.NGGrid2DDisplayController;
 import Uniwork.Visuals.NGStageController;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+
+import java.awt.geom.Arc2D;
 
 public class HabitatStageController extends NGStageController {
 
@@ -23,6 +28,9 @@ public class HabitatStageController extends NGStageController {
 
     @FXML
     private Canvas Layer2;
+
+    @FXML
+    private Canvas LayerTop;
 
     @Override
     protected void CreateDisplayController() {
@@ -39,6 +47,30 @@ public class HabitatStageController extends NGStageController {
         registerDisplayController(dchabitat, true);
         HabitatInfoDisplayController dchabitatText = new HabitatInfoDisplayController(Layer2, "Info");
         registerDisplayController(dchabitatText, true);
+    }
+
+    protected void HandleMousePressed(MouseEvent t) {
+        switch (t.getButton()) {
+            case PRIMARY:
+                NGObjectRequestItem req = newObjectRequest("HabitatModule", "SimpleColony");
+                Integer x = (int)t.getX() / FPixelSize;
+                Integer y = (int)t.getY() / FPixelSize;
+                req.addParam("aX", x.doubleValue());
+                req.addParam("aY", y.doubleValue());
+                Invoke(req);
+                break;
+        }
+    }
+
+    protected void DoInitialize() {
+        super.DoInitialize();
+        LayerTop.addEventHandler(MouseEvent.MOUSE_PRESSED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent t) {
+                        HandleMousePressed(t);
+                    }
+                });
     }
 
     public HabitatStageController() {

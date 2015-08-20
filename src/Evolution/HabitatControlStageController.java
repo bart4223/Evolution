@@ -30,18 +30,20 @@ public class HabitatControlStageController extends NGStageController {
 
     @FXML
     protected void handleReload() {
-        if (cbSamples.getValue() != null) {
-            Invoke("HabitatModule", cbSamples.getValue().toString());
-        }
+        if (cbSamples.getValue() != null)
+            loadSample(cbSamples.getValue().toString());
+    }
+
+    protected void loadSample(String aSample) {
+        NGObjectRequestItem req = newObjectRequest("HabitatModule", "Sample");
+        req.addParam("aName", aSample);
+        Invoke(req);
     }
 
     public void handlecbSamples(ActionEvent actionEvent) {
         if (actionEvent.getEventType().equals(ActionEvent.ACTION)) {
-            if (cbSamples.getValue() != null) {
-                NGObjectRequestItem req = newObjectRequest("HabitatModule", "Sample");
-                req.addParam("aName", cbSamples.getValue().toString());
-                Invoke(req);
-            }
+            if (cbSamples.getValue() != null)
+                loadSample(cbSamples.getValue().toString());
         }
     }
     protected void DoInitialize() {

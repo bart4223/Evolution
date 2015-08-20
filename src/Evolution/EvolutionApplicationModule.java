@@ -1,6 +1,7 @@
 package Evolution;
 
 import Evolution.Biotopes.*;
+import Evolution.Creatures.SimpleColony;
 import Evolution.Processes.CustomEvolutionProcess;
 import Evolution.Processes.GameOfLife2D;
 import Uniwork.Appl.NGApplication;
@@ -48,7 +49,10 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         registerObjectRequest("Habitat", getHabitat(), "Next", "Evolution");
         registerObjectRequest("Habitat", getHabitat(), "Repro", "ToggleReproduction");
         registerObjectRequest("Habitat", getHabitat(), "Kill", "KillAll");
-        NGObjectRequestMethod method = registerObjectRequest("HabitatModule", this, "Sample", "LoadSample");
+        NGObjectRequestMethod method = registerObjectRequest("HabitatModule", this, "SimpleColony", "addSimpleColony");
+        method.addParam("aX", NGObjectRequestParameter.ParamKind.Double);
+        method.addParam("aY", NGObjectRequestParameter.ParamKind.Double);
+        method = registerObjectRequest("HabitatModule", this, "Sample", "LoadSample");
         method.addParam("aName", NGObjectRequestParameter.ParamKind.String);
     }
 
@@ -68,6 +72,11 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
     public void LoadSample(String aName) {
         CustomBiotope biotope = (CustomBiotope)createObjectByName(this, String.format("Evolution.Biotopes.Sample%s", aName));
         LoadSampleBiotope(biotope);
+    }
+
+    public void addSimpleColony(Double aX, Double aY) {
+        if (!FHabitat.InReproduction())
+            FHabitat.addCellColony(new SimpleColony(aX, aY), FEvolutionProcess);
     }
 
 }
