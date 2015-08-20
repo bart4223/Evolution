@@ -1,6 +1,8 @@
 package Evolution;
 
 import Uniwork.Appl.NGCustomStageItem;
+import Uniwork.Base.NGObjectRequestItem;
+import Uniwork.Misc.NGStrings;
 import Uniwork.Visuals.NGStageController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,19 +38,17 @@ public class HabitatControlStageController extends NGStageController {
     public void handlecbSamples(ActionEvent actionEvent) {
         if (actionEvent.getEventType().equals(ActionEvent.ACTION)) {
             if (cbSamples.getValue() != null) {
-                Invoke("HabitatModule", cbSamples.getValue().toString());
+                NGObjectRequestItem req = newObjectRequest("HabitatModule", "Sample");
+                req.addParam("aName", cbSamples.getValue().toString());
+                Invoke(req);
             }
         }
     }
     protected void DoInitialize() {
         super.DoInitialize();
-        cbSamples.getItems().add("Sample01");
-        cbSamples.getItems().add("Sample02");
-        cbSamples.getItems().add("Sample03");
-        cbSamples.getItems().add("Sample04");
-        cbSamples.getItems().add("Sample05");
-        cbSamples.getItems().add("Sample06");
-        cbSamples.getItems().add("Sample07");
+        for (int i = 1; i <= 7; i++) {
+            cbSamples.getItems().add(NGStrings.addString("Biotope", NGStrings.leftPad(String.format("%d", i), 2, "0"), ""));
+        }
     }
 
     public HabitatControlStageController() {
