@@ -1,6 +1,7 @@
 package Evolution.Creatures;
 
 import Uniwork.Graphics.NGPoint2D;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public class SkidColony extends CellColony2D {
 
     public SkidColony(Double aX, Double aY) {
         super(aX, aY);
+        FColor = newColor(Color.GREEN);
         FName = "Skid";
     }
 

@@ -1,6 +1,7 @@
 package Evolution.Creatures;
 
 import Uniwork.Graphics.NGPoint2D;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class BlinkerColony extends CellColony2D {
 
     public BlinkerColony(Double aX, Double aY) {
         super(aX, aY);
+        FColor = newColor(Color.GREEN);
         FName = "Blinker";
     }
 

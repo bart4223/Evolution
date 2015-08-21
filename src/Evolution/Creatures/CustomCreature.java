@@ -15,7 +15,7 @@ public abstract class CustomCreature extends NGObject {
         super();
         FHabitat = aHabitat;
         FEvolutionProcess = aEvolutionProcess;
-        FColor = Color.GREEN;
+        FColor = Color.BLACK;
     }
 
     public CustomHabitat getHabitat() {

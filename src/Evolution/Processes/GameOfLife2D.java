@@ -7,6 +7,7 @@ import Evolution.Habitat2D;
 import Evolution.HabitatCell;
 import Evolution.Processes.CustomEvolutionProcess;
 import Uniwork.Graphics.NGPoint2D;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class GameOfLife2D extends CustomEvolutionProcess {
     protected Integer FWidth;
     protected Integer FHeight;
 
-    protected void ToBornProtozoa(double aX, double aY) {
+    protected void ToBornProtozoa(double aX, double aY, Color aColor) {
         for (CustomCreature c : FCreaturesToBorn) {
             if (c instanceof Protozoa) {
                 Protozoa creature = (Protozoa)c;
@@ -30,11 +31,12 @@ public class GameOfLife2D extends CustomEvolutionProcess {
                     return;
             }
         }
-        ToBorn(new Protozoa(FHabitat, this, aX, aY));
+        Protozoa protozoa = new Protozoa(FHabitat, this, aX, aY, aColor);
+        ToBorn(protozoa);
     }
 
-    protected Integer getNeighborCount(int aX, int aY) {
-        Integer res = 0;
+    protected ArrayList<CustomCreature> getNeighbors(int aX, int aY) {
+        ArrayList<CustomCreature> res = new ArrayList<CustomCreature>();
         ArrayList<HabitatCell> cells = FHabitat.getCells();
         for (int offsety = -1; offsety <= 1; offsety++) {
             for (int offsetx = -1; offsetx <= 1; offsetx++) {
@@ -43,8 +45,9 @@ public class GameOfLife2D extends CustomEvolutionProcess {
                     int y = aY + offsety;
                     if (x >= 0 && x < FWidth && y >= 0 && y < FHeight) {
                         HabitatCell cell = cells.get(y * FWidth + x);
-                        if (cell.getCreature() != null)
-                            res++;
+                        CustomCreature creature = cell.getCreature();
+                        if (creature != null)
+                            res.add(creature);
                     }
                 }
             }
@@ -57,17 +60,17 @@ public class GameOfLife2D extends CustomEvolutionProcess {
         ArrayList<HabitatCell> cells = FHabitat.getCells();
         for (int y = 0; y < FHeight; y++) {
             for (int x = 0; x < FWidth; x++) {
-                int neighborCount = getNeighborCount(x, y);
+                ArrayList<CustomCreature> neighbors = getNeighbors(x, y);
                 HabitatCell cell = cells.get(y * FWidth + x);
                 CustomCreature creature = cell.getCreature();
                 if (creature == null) {
                     //Cell without creature
-                    if (neighborCount == 3)
-                        ToBornProtozoa(x, y);
+                    if (neighbors.size() == 3)
+                        ToBornProtozoa(x, y, neighbors.get(0).getColor());
                 }
                 else {
                     //Cell with creature
-                    if (neighborCount < 2 || neighborCount > 3) {
+                    if (neighbors.size() < 2 || neighbors.size() > 3) {
                         ToDie(creature);
                     }
                 }

@@ -1,6 +1,7 @@
 package Evolution.Creatures;
 
 import Uniwork.Graphics.NGPoint2D;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,7 @@ public class ToadColony extends CellColony2D {
 
     public ToadColony(Double aX, Double aY) {
         super(aX, aY);
+        FColor = newColor(Color.GREEN);
         FName = "Toad";
     }
 
