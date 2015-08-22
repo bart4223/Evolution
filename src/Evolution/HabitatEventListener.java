@@ -9,5 +9,6 @@ public interface HabitatEventListener {
     void handleEvolutionEnd(HabitatEvent e);
     void handleCreatureAdded(CreatureEvent e);
     void handleCreatureRemoved(CreatureEvent e);
+    void handleCurrentEvolutionProcessChanged(HabitatEvent e);
 
 }

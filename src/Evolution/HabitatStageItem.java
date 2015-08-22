@@ -44,4 +44,9 @@ public class HabitatStageItem extends NGCustomStageItem implements HabitatEventL
         sc.addCreature(e.getHabitat(), e.getCreature());
     }
 
+    @Override
+    public void handleCurrentEvolutionProcessChanged(HabitatEvent e) {
+
+    }
+
 }

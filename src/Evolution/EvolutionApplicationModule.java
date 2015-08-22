@@ -4,6 +4,7 @@ import Evolution.Biotopes.*;
 import Evolution.Creatures.SimpleColony;
 import Evolution.Processes.CustomEvolutionProcess;
 import Evolution.Processes.GameOfLife2D;
+import Evolution.Processes.ModuloTwo2D;
 import Uniwork.Appl.NGApplication;
 import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Appl.NGVisualApplicationModule;
@@ -15,7 +16,6 @@ import Uniwork.UI.NGUIHelpContext;
 public class EvolutionApplicationModule extends NGVisualApplicationModule {
 
     protected CustomHabitat FHabitat;
-    protected CustomEvolutionProcess FEvolutionProcess;
 
     @Override
     protected void DoBeforeInitialize() {
@@ -23,24 +23,34 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         NGCustomStageItem item = FStageManager.addStageItem("Control");
         item.setCaption(String.format("%s.Control", getDescription()));
         item.setPosition(1500, 200);
+        getHabitat().addEventListener((HabitatEventListener) item);
         item = FStageManager.addStageItem("Habitat");
         item.setCaption(String.format("%s.Habitat", getDescription()));
         item.setPosition(1500, 300);
         getHabitat().addEventListener((HabitatEventListener) item);
     }
 
+    @Override
+    protected void DoAfterInitialize() {
+        super.DoAfterInitialize();
+        getHabitat().setCurrentEvolutionProcess("Game of Life");
+    }
+
     protected void CreateHabitat() {
         FHabitat = new Habitat2D(this, EvolutionConsts.C_COMPONENT_HABITAT, 80, 80);
         FHabitat.setLogLevel(NGApplication.Application.getLogManager().getLogLevel());
-        FEvolutionProcess = new GameOfLife2D(FHabitat);
-        FHabitat.addEvolutionProcess(FEvolutionProcess);
+        CustomEvolutionProcess ep = new GameOfLife2D(FHabitat);
+        FHabitat.addEvolutionProcess(ep);
+        FHabitat.setCurrentEvolutionProcess(ep.getName());
+        ep = new ModuloTwo2D(FHabitat);
+        FHabitat.addEvolutionProcess(ep);
         FComponentManager.registerComponent(FHabitat);
     }
 
     protected void LoadSampleBiotope(CustomBiotope aBiotope) {
         Boolean ir = FHabitat.IsInReproduction();
         FHabitat.KillAll();
-        FHabitat.addBiotope(aBiotope, FEvolutionProcess);
+        FHabitat.addBiotope(aBiotope);
         if (ir)
             FHabitat.ToggleReproduction();
     }
@@ -55,6 +65,8 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         method.addParam("aX", NGObjectRequestParameter.ParamKind.Double);
         method.addParam("aY", NGObjectRequestParameter.ParamKind.Double);
         method = registerObjectRequest("HabitatModule", this, "Sample", "LoadSample");
+        method.addParam("aName", NGObjectRequestParameter.ParamKind.String);
+        method = registerObjectRequest("HabitatModule", this, "Process", "SetCurrentProcess");
         method.addParam("aName", NGObjectRequestParameter.ParamKind.String);
         registerObjectRequest("HabitatModule", this, "Help", "ShowHelp");
     }
@@ -80,7 +92,11 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
 
     public void addSimpleColony(Double aX, Double aY) {
         if (!FHabitat.InReproduction())
-            FHabitat.addCellColony(new SimpleColony(aX, aY), FEvolutionProcess);
+            FHabitat.addCellColony(new SimpleColony(aX, aY));
+    }
+
+    public void SetCurrentProcess(String aName) {
+        FHabitat.setCurrentEvolutionProcess(aName);
     }
 
     public void ShowHelp() {

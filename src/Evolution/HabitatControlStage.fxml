@@ -9,8 +9,9 @@
         <Button id="btnRepro" prefWidth="80" text="Repro" onAction="#handleRepro" fx:id="btnRepro" />
         <Button id="btnNext" prefWidth="80" text="Next" onAction="#handleNext" fx:id="btnNext" />
         <Button id="btnKill" prefWidth="80" text="Kill" onAction="#handleKill" fx:id="btnKill" />
-        <ComboBox id="cbSamples" prefWidth="200" onAction="#handlecbSamples" fx:id="cbSamples" />
+        <ComboBox id="cbSamples" prefWidth="150" onAction="#handlecbSamples" fx:id="cbSamples" />
         <Button id="btnReloead" prefWidth="20" text="..." onAction="#handleReload" fx:id="btnReload" />
         <Button id="btnHelp" prefWidth="80" text="Help" onAction="#handleHelp" fx:id="btnHelp" />
+        <ComboBox id="cbProcesses" prefWidth="150" onAction="#handlecbProcesses" fx:id="cbProcesses" />
     </HBox>
 </AnchorPane>

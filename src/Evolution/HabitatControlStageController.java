@@ -14,6 +14,9 @@ public class HabitatControlStageController extends NGStageController {
     private ComboBox cbSamples;
 
     @FXML
+    private ComboBox cbProcesses;
+
+    @FXML
     protected void handleNext(){
         Invoke("Habitat", "Next");
     }
@@ -45,17 +48,33 @@ public class HabitatControlStageController extends NGStageController {
         Invoke(req);
     }
 
+    protected void setProcess(String aProcess) {
+        NGObjectRequestItem req = newObjectRequest("HabitatModule", "Process");
+        req.addParam("aName", aProcess);
+        Invoke(req);
+    }
+
     public void handlecbSamples(ActionEvent actionEvent) {
         if (actionEvent.getEventType().equals(ActionEvent.ACTION)) {
             if (cbSamples.getValue() != null)
                 loadSample(cbSamples.getValue().toString());
         }
     }
+
+    public void handlecbProcesses(ActionEvent actionEvent) {
+        if (actionEvent.getEventType().equals(ActionEvent.ACTION)) {
+            if (cbProcesses.getValue() != null)
+                setProcess(cbProcesses.getValue().toString());
+        }
+    }
+
     protected void DoInitialize() {
         super.DoInitialize();
         for (int i = 1; i <= 7; i++) {
             cbSamples.getItems().add(NGStrings.addString("Biotope", NGStrings.leftPad(String.format("%d", i), 2, "0"), ""));
         }
+        cbProcesses.getItems().add("Game of Life");
+        cbProcesses.getItems().add("Modulo Two");
     }
 
     public HabitatControlStageController() {
@@ -64,6 +83,10 @@ public class HabitatControlStageController extends NGStageController {
 
     public HabitatControlStageController(NGCustomStageItem aStageItem) {
         super(aStageItem);
+    }
+
+    public void setCurrentEvolutionProcess(String aName) {
+        cbProcesses.getSelectionModel().select(aName);
     }
 
 }

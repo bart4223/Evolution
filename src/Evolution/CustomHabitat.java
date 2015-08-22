@@ -18,15 +18,18 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     protected Integer FGenerationCount;
     protected Integer FMaxCreatureCount;
     protected NGTickGenerator FTick;
+    protected CustomEvolutionProcess FCurrentEvolutionProcess;
 
     protected void InternalEvolution() {
         for (CustomEvolutionProcess ep : FEvolutionProcesses) {
-            DoEvolutionStart(ep);
-            try {
-                DoEvolution(ep);
-            }
-            finally {
-                DoEvolutionEnd(ep);
+            if (FCurrentEvolutionProcess == null || FCurrentEvolutionProcess.equals(ep)) {
+                DoEvolutionStart(ep);
+                try {
+                    DoEvolution(ep);
+                }
+                finally {
+                    DoEvolutionEnd(ep);
+                }
             }
         }
     }
@@ -95,6 +98,13 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         }
     }
 
+    protected synchronized void raiseCurrentEvolutionProcessChangedEvent() {
+        HabitatEvent event = new HabitatEvent(this);
+        for (HabitatEventListener listener : FEventListeners) {
+            listener.handleCurrentEvolutionProcessChanged(event);
+        }
+    }
+
     protected void DoInitializeCells() {
 
     }
@@ -138,6 +148,14 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
             UnassignFromCell(aCreature);
     }
 
+    protected CustomEvolutionProcess getEvolutionProcess(String aName) {
+        for (CustomEvolutionProcess ep : FEvolutionProcesses) {
+            if (ep.getName().equals(aName))
+                return ep;
+        }
+        return null;
+    }
+
     public CustomHabitat(NGComponent aOwner, String aName) {
         super(aOwner, aName);
         FLogManager = new NGLogManager();
@@ -151,6 +169,7 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         FEvolutionProcesses = new ArrayList<CustomEvolutionProcess>();
         FGenerationCount = 0;
         FMaxCreatureCount = 0;
+        FCurrentEvolutionProcess = null;
     }
 
     public synchronized void KillAll() {
@@ -246,15 +265,15 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         return FTick.GetItemEnabled("Main");
     }
 
-    public void addCellColony(CustomCellColony aCellColony, CustomEvolutionProcess aEvolutionProcess) {
-        writeInfo(5, String.format("Cell colony \"%s\" with evolution process \"%s\" added", aCellColony.getInfo(), aEvolutionProcess.getInfo()));
+    public void addCellColony(CustomCellColony aCellColony) {
+        writeInfo(5, String.format("Cell colony \"%s\" with evolution process \"%s\" added", aCellColony.getInfo(), FCurrentEvolutionProcess.getInfo()));
     }
 
-    public void addBiotope(CustomBiotope aBiotope, CustomEvolutionProcess aEvolutionProcess) {
-        writeInfo(5, String.format("Add biotope %s with evolution process \"%s\"", aBiotope.getInfo(), aEvolutionProcess.getInfo()));
+    public void addBiotope(CustomBiotope aBiotope) {
+        writeInfo(5, String.format("Add biotope %s with evolution process \"%s\"", aBiotope.getInfo(), FCurrentEvolutionProcess.getInfo()));
         Iterator<CustomCellColony> itr = aBiotope.getColonies();
         while (itr.hasNext()) {
-            addCellColony(itr.next(), aEvolutionProcess);
+            addCellColony(itr.next());
         }
     }
 
@@ -264,6 +283,15 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
 
     public Boolean InReproduction() {
         return FTick.GetItemEnabled("Main");
+    }
+
+    public CustomEvolutionProcess getCurrentEvolutionProcess() {
+        return FCurrentEvolutionProcess;
+    }
+
+    public void setCurrentEvolutionProcess(String aName) {
+        FCurrentEvolutionProcess = getEvolutionProcess(aName);
+        raiseCurrentEvolutionProcessChangedEvent();
     }
 
 }

@@ -11,13 +11,11 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
-public class GameOfLife2D extends CustomEvolutionProcess {
+public class ModuloTwo2D extends CustomEvolutionProcess {
 
     // Regeln
-    // 1. Zelle ohne Lebewesen mit genau 3 benachbarten Zellen mit Lebewesen dann wird in dieser Zelle ein Lebewesen geboren
-    // 2. Zelle mit Lebewesen und weniger als 2 benachbarten lebenden Zellen sterben
-    // 3. Zelle mit Lebewesen und 2 oder 3 benachbarten lebenden Zellen bleiben leben
-    // 4. Zelle mit Lebewesen und mehr als 3 benachbarten lebenden Zellen sterben
+    // 1. Zelle ohne Lebewesen und 1,3,5,7 benachbarten Zellen mit Lebewesen dann wird in dieser Zelle ein Lebewesen geboren
+    // 2. Zelle mit Lebewesen und 0,2,4,6,8 benachbarten lebenden Zellen sterben
 
     protected Integer FWidth;
     protected Integer FHeight;
@@ -65,12 +63,12 @@ public class GameOfLife2D extends CustomEvolutionProcess {
                 CustomCreature creature = cell.getCreature();
                 if (creature == null) {
                     //Cell without creature
-                    if (neighbors.size() == 3)
+                    if (neighbors.size() % 2 == 1)
                         ToBornProtozoa(x, y, neighbors.get(NGRandomGenerator.GlobalRandomGenerator.getInteger(0, neighbors.size() - 1)).getColor());
                 }
                 else {
                     //Cell with creature
-                    if (neighbors.size() < 2 || neighbors.size() > 3) {
+                    if (neighbors.size() % 2 == 0) {
                         ToDie(creature);
                     }
                 }
@@ -78,7 +76,7 @@ public class GameOfLife2D extends CustomEvolutionProcess {
         }
     }
 
-    public GameOfLife2D(CustomHabitat aHabitat) {
+    public ModuloTwo2D(CustomHabitat aHabitat) {
         super(aHabitat);
         FWidth = ((Habitat2D)FHabitat).getWidth();
         FHeight = ((Habitat2D)FHabitat).getHeight();
@@ -86,7 +84,7 @@ public class GameOfLife2D extends CustomEvolutionProcess {
 
     @Override
     public String getName() {
-        return "Game of Life";
+        return "Modulo Two";
     }
 
 }
