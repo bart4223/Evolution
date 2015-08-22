@@ -18,3 +18,4 @@ Version history
     19.08.15    Many cell colonies and sample biotopes
     20.08.15    Dynamic sample call and manual creatures
     21.08.15    Cell colony with different color
+    22.08.15    Help support

@@ -1,0 +1,7 @@
+Welcome to evolution...
+
+The project visualize same evolution algorithm (like GameOfLife).
+
+Have fun...
+
+(C) by NG MMXV

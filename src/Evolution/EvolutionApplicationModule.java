@@ -46,6 +46,7 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
 
     @Override
     protected void registerObjectRequests() {
+        super.registerObjectRequests();
         registerObjectRequest("Habitat", getHabitat(), "Next", "Evolution");
         registerObjectRequest("Habitat", getHabitat(), "Repro", "ToggleReproduction");
         registerObjectRequest("Habitat", getHabitat(), "Kill", "KillAll");
