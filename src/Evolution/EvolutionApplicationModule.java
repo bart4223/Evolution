@@ -10,6 +10,7 @@ import Uniwork.Appl.NGVisualApplicationModule;
 import Uniwork.Base.NGComponent;
 import Uniwork.Base.NGObjectRequestMethod;
 import Uniwork.Base.NGObjectRequestParameter;
+import Uniwork.UI.NGUIHelpContext;
 
 public class EvolutionApplicationModule extends NGVisualApplicationModule {
 
@@ -55,6 +56,7 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         method.addParam("aY", NGObjectRequestParameter.ParamKind.Double);
         method = registerObjectRequest("HabitatModule", this, "Sample", "LoadSample");
         method.addParam("aName", NGObjectRequestParameter.ParamKind.String);
+        registerObjectRequest("HabitatModule", this, "Help", "ShowHelp");
     }
 
     public EvolutionApplicationModule(NGComponent aOwner, String aName) {
@@ -62,6 +64,7 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         CreateHabitat();
         FStageManager.registerItemClass("Control", "Evolution.HabitatControlStageItem");
         FStageManager.registerItemClass("Habitat", "Evolution.HabitatStageItem");
+        FToolboxManager.registerItemClass("Help", "Uniwork.UI.NGUIHelpStageItem");
     }
 
     public CustomHabitat getHabitat() {
@@ -78,6 +81,10 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
     public void addSimpleColony(Double aX, Double aY) {
         if (!FHabitat.InReproduction())
             FHabitat.addCellColony(new SimpleColony(aX, aY), FEvolutionProcess);
+    }
+
+    public void ShowHelp() {
+        FToolboxManager.ShowToolbox("Help", String.format("%s.Help", getDescription()), new NGUIHelpContext(Application.LoadResourceFileContent("help/evolution.txt")));
     }
 
 }

@@ -11,7 +11,7 @@ public class MainApplicationModule extends NGVisualApplicationModule {
     protected void DoBeforeInitialize() {
         super.DoBeforeInitialize();
         NGCustomStageItem item = FStageManager.addStageItem("Main", FPrimaryStage);
-        item.setCaption(FDescription);
+        item.setCaption(getDescription());
         item.setPosition(1000, 100);
     }
 
@@ -29,7 +29,7 @@ public class MainApplicationModule extends NGVisualApplicationModule {
     }
 
     public void ShowHelp() {
-        FToolboxManager.ShowToolbox("Help", new NGUIHelpContext(Application.LoadResourceFileContent("help/welcome.txt")));
+        FToolboxManager.ShowToolbox("Help", String.format("%s.Help", getDescription()), new NGUIHelpContext(Application.LoadResourceFileContent("help/welcome.txt")));
     }
 
 }

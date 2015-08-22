@@ -11,5 +11,6 @@
         <Button id="btnKill" prefWidth="80" text="Kill" onAction="#handleKill" fx:id="btnKill" />
         <ComboBox id="cbSamples" prefWidth="200" onAction="#handlecbSamples" fx:id="cbSamples" />
         <Button id="btnReloead" prefWidth="20" text="..." onAction="#handleReload" fx:id="btnReload" />
+        <Button id="btnHelp" prefWidth="80" text="Help" onAction="#handleHelp" fx:id="btnHelp" />
     </HBox>
 </AnchorPane>

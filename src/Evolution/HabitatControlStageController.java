@@ -29,6 +29,11 @@ public class HabitatControlStageController extends NGStageController {
     }
 
     @FXML
+    protected void handleHelp(){
+        Invoke("HabitatModule", "Help");
+    }
+
+    @FXML
     protected void handleReload() {
         if (cbSamples.getValue() != null)
             loadSample(cbSamples.getValue().toString());
