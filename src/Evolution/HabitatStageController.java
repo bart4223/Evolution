@@ -14,8 +14,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-import java.awt.geom.Arc2D;
-
 public class HabitatStageController extends NGStageController {
 
     protected Integer FPixelSize = 10;
@@ -49,15 +47,27 @@ public class HabitatStageController extends NGStageController {
         registerDisplayController(dchabitatText, true);
     }
 
-    protected void HandleMousePressed(MouseEvent t) {
-        switch (t.getButton()) {
+    protected void addSimpleColony(Double aX, Double aY) {
+        Integer x = (int)(aX / FPixelSize);
+        Integer y = (int)(aY / FPixelSize);
+        NGObjectRequestItem req = newObjectRequest("HabitatModule", "SimpleColony");
+        req.addParam("aX", x.doubleValue());
+        req.addParam("aY", y.doubleValue());
+        Invoke(req);
+    }
+
+    protected void HandleMousePressed(MouseEvent e) {
+        switch (e.getButton()) {
             case PRIMARY:
-                NGObjectRequestItem req = newObjectRequest("HabitatModule", "SimpleColony");
-                Integer x = (int)t.getX() / FPixelSize;
-                Integer y = (int)t.getY() / FPixelSize;
-                req.addParam("aX", x.doubleValue());
-                req.addParam("aY", y.doubleValue());
-                Invoke(req);
+                addSimpleColony(e.getX(), e.getY());
+                break;
+        }
+    }
+
+    protected void HandleMouseDragged(MouseEvent e) {
+        switch (e.getButton()) {
+            case PRIMARY:
+                addSimpleColony(e.getX(), e.getY());
                 break;
         }
     }
@@ -70,6 +80,13 @@ public class HabitatStageController extends NGStageController {
                     @Override
                     public void handle(MouseEvent t) {
                         HandleMousePressed(t);
+                    }
+                });
+        LayerTop.addEventHandler(MouseEvent.MOUSE_DRAGGED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent t) {
+                        HandleMouseDragged(t);
                     }
                 });
     }

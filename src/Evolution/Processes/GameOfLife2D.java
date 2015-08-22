@@ -5,8 +5,8 @@ import Evolution.Creatures.Protozoa;
 import Evolution.CustomHabitat;
 import Evolution.Habitat2D;
 import Evolution.HabitatCell;
-import Evolution.Processes.CustomEvolutionProcess;
 import Uniwork.Graphics.NGPoint2D;
+import Uniwork.Misc.NGRandomGenerator;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -66,7 +66,7 @@ public class GameOfLife2D extends CustomEvolutionProcess {
                 if (creature == null) {
                     //Cell without creature
                     if (neighbors.size() == 3)
-                        ToBornProtozoa(x, y, neighbors.get(0).getColor());
+                        ToBornProtozoa(x, y, neighbors.get(NGRandomGenerator.GlobalRandomGenerator.getInteger(0, 2)).getColor());
                 }
                 else {
                     //Cell with creature
