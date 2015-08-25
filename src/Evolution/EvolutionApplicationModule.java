@@ -11,6 +11,7 @@ import Uniwork.Appl.NGVisualApplicationModule;
 import Uniwork.Base.NGComponent;
 import Uniwork.Base.NGObjectRequestMethod;
 import Uniwork.Base.NGObjectRequestParameter;
+import Uniwork.Misc.NGLogEventListener;
 import Uniwork.UI.NGUIHelpContext;
 
 public class EvolutionApplicationModule extends NGVisualApplicationModule {
@@ -99,6 +100,14 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
 
     public void ShowHelp() {
         FToolboxManager.ShowToolbox("Help", String.format("%s.Help", getDescription()), new NGUIHelpContext(Application.LoadResourceFileContent("help/evolution.txt")));
+    }
+
+    public void addLogListener(NGLogEventListener aLogListener) {
+        FHabitat.addLogListener(aLogListener);
+    }
+
+    public void removeLogListener(NGLogEventListener aLogListener) {
+        FHabitat.removeLogListener(aLogListener);
     }
 
 }

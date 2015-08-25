@@ -5,11 +5,13 @@ import Uniwork.Appl.NGCustomApplicationModule;
 
 public class Main extends NGApplication {
 
+    protected MainApplicationModule FMainModule;
+
     @Override
     public void DoBeforeInitialize() {
         super.DoBeforeInitialize();
-        MainApplicationModule main = (MainApplicationModule)FModuleManager.addModule(MainApplicationModule.class, "Main");
-        main.setPrimaryStage(FPrimaryStage);
+        FMainModule = (MainApplicationModule)FModuleManager.addModule(MainApplicationModule.class, "Main");
+        FMainModule.setPrimaryStage(FPrimaryStage);
     }
 
     @Override
@@ -31,7 +33,8 @@ public class Main extends NGApplication {
     }
 
     public void addEvolutionModule() {
-        NGCustomApplicationModule module = addModule(EvolutionApplicationModule.class, true, String.format("%d",FModuleManager.getModuleCount()));
+        EvolutionApplicationModule module = (EvolutionApplicationModule)addModule(EvolutionApplicationModule.class, true, String.format("%d", FModuleManager.getModuleCount()));
+        module.addLogListener(FMainModule.getConsole());
     }
 
 }

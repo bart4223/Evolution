@@ -7,7 +7,7 @@ import Uniwork.Graphics.NGPoint2D;
 import Uniwork.Misc.NGLogEvent;
 import Uniwork.Misc.NGLogEventListener;
 
-public class Habitat2D extends CustomHabitat implements NGLogEventListener {
+public class Habitat2D extends CustomHabitat {
 
     protected Integer FWidth;
     protected Integer FHeight;
@@ -65,16 +65,6 @@ public class Habitat2D extends CustomHabitat implements NGLogEventListener {
                 }
             }
         }
-    }
-
-    @Override
-    public void handleAddLog(NGLogEvent e) {
-        System.out.println(e.LogEntry.GetFullAsString());
-    }
-
-    @Override
-    public void handleClearLog() {
-
     }
 
     public Boolean IsCellBusy(Double aX, Double aY) {

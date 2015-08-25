@@ -9,7 +9,7 @@ import Uniwork.Misc.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public abstract class CustomHabitat extends NGComponent implements NGLogEventListener, NGTickListener {
+public abstract class CustomHabitat extends NGComponent implements NGTickListener {
 
     protected ArrayList<HabitatEventListener> FEventListeners;
     protected ArrayList<CustomEvolutionProcess> FEvolutionProcesses;
@@ -186,7 +186,6 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     public CustomHabitat(NGComponent aOwner, String aName) {
         super(aOwner, aName);
         FLogManager = new NGLogManager();
-        FLogManager.addEventListener(this);
         FTick = new NGTickGenerator(10);
         FTick.NewItem("Main", 10);
         FTick.addListener("Main", this);
@@ -268,16 +267,6 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     }
 
     @Override
-    public void handleAddLog(NGLogEvent e) {
-
-    }
-
-    @Override
-    public void handleClearLog() {
-
-    }
-
-    @Override
     public void handleTick(NGTickEvent e) {
         if (e.Name.equals("Main")) {
             Evolution();
@@ -332,6 +321,14 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
             if (on)
                 MainTickOn();
         }
+    }
+
+    public void addLogListener(NGLogEventListener aLogListener) {
+        FLogManager.addEventListener(aLogListener);
+    }
+
+    public void removeLogListener(NGLogEventListener aLogListener) {
+        FLogManager.removeEventListener(aLogListener);
     }
 
 }
