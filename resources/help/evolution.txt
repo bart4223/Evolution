@@ -1,6 +1,4 @@
-The evolution simulation based on a habitat with 80 x 80 cells.
-In these cells are live or die creatures like protozoa.
-Protozoa is a one cell creature and can live in cell colonies.
+The evolution simulation based on a habitat with 80 x 80 cells. In these cells are live or die creatures like protozoa. Protozoa is a one celled creature and can live in cell colonies.
 
 Colonies are:
 
