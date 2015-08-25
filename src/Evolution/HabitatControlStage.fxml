@@ -13,5 +13,6 @@
         <Button id="btnReloead" prefWidth="20" text="..." onAction="#handleReload" fx:id="btnReload" />
         <Button id="btnHelp" prefWidth="80" text="Help" onAction="#handleHelp" fx:id="btnHelp" />
         <ComboBox id="cbProcesses" prefWidth="150" onAction="#handlecbProcesses" fx:id="cbProcesses" />
+        <ComboBox id="cbTicks" prefWidth="50" onAction="#handlecbTicks" fx:id="cbTicks" />
     </HBox>
 </AnchorPane>

@@ -58,15 +58,17 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
     @Override
     protected void registerObjectRequests() {
         super.registerObjectRequests();
-        registerObjectRequest("Habitat", getHabitat(), "Next", "Evolution");
-        registerObjectRequest("Habitat", getHabitat(), "Repro", "ToggleReproduction");
-        registerObjectRequest("Habitat", getHabitat(), "Kill", "KillAll");
-        NGObjectRequestMethod method = registerObjectRequest("HabitatModule", this, "SimpleColony", "addSimpleColony");
+        registerObjectRequest("Habitat", FHabitat, "Next", "Evolution");
+        registerObjectRequest("Habitat", FHabitat, "Repro", "ToggleReproduction");
+        registerObjectRequest("Habitat", FHabitat, "Kill", "KillAll");
+        NGObjectRequestMethod method = registerObjectRequest("Habitat", FHabitat, "Process", "setCurrentEvolutionProcess");
+        method.addParam("aName", NGObjectRequestParameter.ParamKind.String);
+        method = registerObjectRequest("Habitat", FHabitat, "Tick", "setTick");
+        method.addParam("aTick", NGObjectRequestParameter.ParamKind.Integer);
+        method = registerObjectRequest("HabitatModule", this, "SimpleColony", "addSimpleColony");
         method.addParam("aX", NGObjectRequestParameter.ParamKind.Double);
         method.addParam("aY", NGObjectRequestParameter.ParamKind.Double);
         method = registerObjectRequest("HabitatModule", this, "Sample", "LoadSample");
-        method.addParam("aName", NGObjectRequestParameter.ParamKind.String);
-        method = registerObjectRequest("HabitatModule", this, "Process", "SetCurrentProcess");
         method.addParam("aName", NGObjectRequestParameter.ParamKind.String);
         registerObjectRequest("HabitatModule", this, "Help", "ShowHelp");
     }
@@ -93,10 +95,6 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
     public void addSimpleColony(Double aX, Double aY) {
         if (!FHabitat.InReproduction())
             FHabitat.addCellColony(new SimpleColony(aX, aY));
-    }
-
-    public void SetCurrentProcess(String aName) {
-        FHabitat.setCurrentEvolutionProcess(aName);
     }
 
     public void ShowHelp() {

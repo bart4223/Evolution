@@ -175,12 +175,20 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         }
     }
 
+    protected void MainTickOff() {
+        FTick.SetItemEnabled("Main", false);
+    }
+
+    protected void MainTickOn() {
+        FTick.SetItemEnabled("Main", true);
+    }
+
     public CustomHabitat(NGComponent aOwner, String aName) {
         super(aOwner, aName);
         FLogManager = new NGLogManager();
         FLogManager.addEventListener(this);
         FTick = new NGTickGenerator(10);
-        FTick.NewItem("Main", 1);
+        FTick.NewItem("Main", 10);
         FTick.addListener("Main", this);
         FEventListeners = new ArrayList<HabitatEventListener>();
         FCells = new ArrayList<HabitatCell>();
@@ -193,7 +201,7 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     }
 
     public synchronized void KillAll() {
-        FTick.SetItemEnabled("Main", false);
+        MainTickOff();
         FGenerationCount = 0;
         FMaxCreatureCount = 0;
         FMaxCreatureAge = 0.0;
@@ -205,7 +213,7 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         FEventListeners.add(aListener);
     }
 
-    public void removeEventListener(HabitatEventListener aListener)   {
+    public void removeEventListener(HabitatEventListener aListener) {
         FEventListeners.remove(aListener);
     }
 
@@ -311,6 +319,19 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     public void setCurrentEvolutionProcess(String aName) {
         FCurrentEvolutionProcess = getEvolutionProcess(aName);
         raiseCurrentEvolutionProcessChangedEvent();
+    }
+
+    public void setTick(Integer aTick) {
+        Boolean on = FTick.GetItemEnabled("Main");
+        if (on)
+            MainTickOff();
+        try {
+            FTick.SetItemInterval("Main", aTick);
+        }
+        finally {
+            if (on)
+                MainTickOn();
+        }
     }
 
 }
