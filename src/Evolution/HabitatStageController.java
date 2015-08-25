@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 public class HabitatStageController extends NGStageController {
 
     protected Integer FPixelSize = 10;
+    protected Integer FUpdateCount = 0;
 
     @FXML
     private Canvas Layer0;
@@ -91,6 +92,18 @@ public class HabitatStageController extends NGStageController {
                 });
     }
 
+    protected void UpdateHabitatInfo(CustomHabitat aHabitat) {
+        HabitatInfoDisplayController dc = (HabitatInfoDisplayController)getDisplayController("Info");
+        dc.Habitat = aHabitat;
+        RenderScene(dc);
+    }
+
+    protected void UpdateHabitatCells(Habitat2D aHabitat) {
+        Habitat2DDisplayController dc = (Habitat2DDisplayController)getDisplayController("Habitat");
+        dc.Habitat = aHabitat;
+        RenderScene(dc);
+    }
+
     public HabitatStageController() {
         this(null);
         FOwnRenderThread = true;
@@ -101,27 +114,30 @@ public class HabitatStageController extends NGStageController {
     }
 
     public void addCreature(CustomHabitat aHabitat, CustomCreature aCreature) {
-        if (aHabitat instanceof Habitat2D) {
-            Habitat2DDisplayController dc = (Habitat2DDisplayController)getDisplayController("Habitat");
-            dc.Habitat = (Habitat2D)aHabitat;
-            RenderScene(dc);
-        }
-        UpdateHabitatInfo(aHabitat);
+        UpdateHabitat(aHabitat);
     }
 
     public void removeCreature(CustomHabitat aHabitat, CustomCreature aCreature) {
-        if (aHabitat instanceof Habitat2D) {
-            Habitat2DDisplayController dc = (Habitat2DDisplayController)getDisplayController("Habitat");
-            dc.Habitat = (Habitat2D)aHabitat;
-            RenderScene(dc);
-        }
-        UpdateHabitatInfo(aHabitat);
+        UpdateHabitat(aHabitat);
     }
 
-    public void UpdateHabitatInfo(CustomHabitat aHabitat) {
-        HabitatInfoDisplayController dc = (HabitatInfoDisplayController)getDisplayController("Info");
-        dc.Habitat = aHabitat;
-        RenderScene(dc);
+    public void BeginUpdateHabitat(CustomHabitat aHabitat) {
+        FUpdateCount++;
+    }
+
+    public void EndUpdateHabitat(CustomHabitat aHabitat) {
+        FUpdateCount--;
+        if (FUpdateCount < 0)
+            FUpdateCount = 0;
+        UpdateHabitat(aHabitat);
+    }
+
+    public void UpdateHabitat(CustomHabitat aHabitat) {
+        if (FUpdateCount == 0) {
+            if (aHabitat instanceof Habitat2D)
+                UpdateHabitatCells((Habitat2D) aHabitat);
+            UpdateHabitatInfo(aHabitat);
+        }
     }
 
 }

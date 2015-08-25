@@ -10,12 +10,14 @@ public abstract class CustomCreature extends NGObject {
     protected CustomHabitat FHabitat;
     protected CustomEvolutionProcess FEvolutionProcess;
     protected Color FColor;
+    protected Double FAge;
 
     public CustomCreature(CustomHabitat aHabitat, CustomEvolutionProcess aEvolutionProcess) {
         super();
         FHabitat = aHabitat;
         FEvolutionProcess = aEvolutionProcess;
         FColor = Color.BLACK;
+        FAge = 0.0;
     }
 
     public CustomHabitat getHabitat() {
@@ -32,6 +34,14 @@ public abstract class CustomCreature extends NGObject {
 
     public Color getColor() {
         return FColor;
+    }
+
+    public void Mature() {
+        FAge = FAge + 1.0;
+    }
+
+    public Double getAge() {
+        return FAge;
     }
 
 }

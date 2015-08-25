@@ -17,6 +17,7 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
     protected ArrayList<HabitatCell> FCells;
     protected Integer FGenerationCount;
     protected Integer FMaxCreatureCount;
+    protected Double FMaxCreatureAge;
     protected NGTickGenerator FTick;
     protected CustomEvolutionProcess FCurrentEvolutionProcess;
 
@@ -44,10 +45,22 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
             FMaxCreatureCount = FCreatures.size();
     }
 
+    protected void UpdateGenerationCount() {
+        FGenerationCount++;
+    }
+
+    protected void UpdateMaxCreatureAge() {
+        for (CustomCreature creature : FCreatures) {
+            if (FMaxCreatureAge < creature.getAge())
+                FMaxCreatureAge = creature.getAge();
+        }
+    }
+
     protected void DoEvolutionEnd(CustomEvolutionProcess aEvolutionProcess) {
         aEvolutionProcess.End();
-        FGenerationCount++;
+        UpdateGenerationCount();
         UpdateMaxCreatureCount();
+        UpdateMaxCreatureAge();
         raiseEvolutionEndEvent();
     }
 
@@ -156,12 +169,18 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         return null;
     }
 
+    protected void removeAllCreatures() {
+        while (FCreatures.size() > 0) {
+            removeCreature(FCreatures.get(0));
+        }
+    }
+
     public CustomHabitat(NGComponent aOwner, String aName) {
         super(aOwner, aName);
         FLogManager = new NGLogManager();
         FLogManager.addEventListener(this);
         FTick = new NGTickGenerator(10);
-        FTick.NewItem("Main", 20);
+        FTick.NewItem("Main", 1);
         FTick.addListener("Main", this);
         FEventListeners = new ArrayList<HabitatEventListener>();
         FCells = new ArrayList<HabitatCell>();
@@ -169,6 +188,7 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         FEvolutionProcesses = new ArrayList<CustomEvolutionProcess>();
         FGenerationCount = 0;
         FMaxCreatureCount = 0;
+        FMaxCreatureAge = 0.0;
         FCurrentEvolutionProcess = null;
     }
 
@@ -176,14 +196,9 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
         FTick.SetItemEnabled("Main", false);
         FGenerationCount = 0;
         FMaxCreatureCount = 0;
+        FMaxCreatureAge = 0.0;
         removeAllCreatures();
         raiseKillAllEvent();
-    }
-
-    public void removeAllCreatures() {
-        while (FCreatures.size() > 0) {
-            removeCreature(FCreatures.get(0));
-        }
     }
 
     public void addEventListener(HabitatEventListener aListener)  {
@@ -238,6 +253,10 @@ public abstract class CustomHabitat extends NGComponent implements NGLogEventLis
 
     public Integer getGenerationCount() {
         return FGenerationCount;
+    }
+
+    public Double getMaxCreatureAge() {
+        return FMaxCreatureAge;
     }
 
     @Override

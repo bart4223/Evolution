@@ -70,9 +70,10 @@ public class GameOfLife2D extends CustomEvolutionProcess {
                 }
                 else {
                     //Cell with creature
-                    if (neighbors.size() < 2 || neighbors.size() > 3) {
+                    if (neighbors.size() < 2 || neighbors.size() > 3)
                         ToDie(creature);
-                    }
+                    else
+                        creature.Mature();
                 }
             }
         }

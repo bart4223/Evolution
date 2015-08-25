@@ -17,19 +17,19 @@ public class HabitatStageItem extends NGCustomStageItem implements HabitatEventL
     @Override
     public void handleKillAll(HabitatEvent e) {
         HabitatStageController sc = (HabitatStageController)FStageController;
-        sc.UpdateHabitatInfo(e.getHabitat());
+        sc.UpdateHabitat(e.getHabitat());
     }
 
     @Override
     public void handleEvolutionStart(HabitatEvent e) {
         HabitatStageController sc = (HabitatStageController)FStageController;
-        sc.UpdateHabitatInfo(e.getHabitat());
+        sc.BeginUpdateHabitat(e.getHabitat());
     }
 
     @Override
     public void handleEvolutionEnd(HabitatEvent e) {
         HabitatStageController sc = (HabitatStageController)FStageController;
-        sc.UpdateHabitatInfo(e.getHabitat());
+        sc.EndUpdateHabitat(e.getHabitat());
     }
 
     @Override
@@ -41,7 +41,7 @@ public class HabitatStageItem extends NGCustomStageItem implements HabitatEventL
     @Override
     public void handleCreatureRemoved(CreatureEvent e) {
         HabitatStageController sc = (HabitatStageController)FStageController;
-        sc.addCreature(e.getHabitat(), e.getCreature());
+        sc.removeCreature(e.getHabitat(), e.getCreature());
     }
 
     @Override

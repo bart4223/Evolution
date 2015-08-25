@@ -6,6 +6,7 @@ import Evolution.Habitat2D;
 import Uniwork.Graphics.NGPoint2D;
 import Uniwork.Visuals.NGDisplayController;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,17 @@ public class Habitat2DDisplayController extends NGDisplayController {
         FGC.clearRect(FPosition.getXAsInt() * FPixelSize, FPosition.getYAsInt() * FPixelSize, FWidth, FHeight);
     }
 
+    public Color calculateColor(CustomCreature aCreature) {
+        Color res = aCreature.getColor();
+        if (aCreature.getAge() >= 10.0 && aCreature.getAge() < 20.0) {
+            res = Color.DARKGREEN;
+        } else  if (aCreature.getAge() >= 20.0 && aCreature.getAge() < 30.0)
+            res = Color.DARKGRAY;
+        else if (aCreature.getAge() > 30.0)
+            res = Color.GRAY;
+        return res;
+    }
+
     @Override
     protected void DoRender() {
         super.DoRender();
@@ -25,7 +37,7 @@ public class Habitat2DDisplayController extends NGDisplayController {
             for (CustomCreature creature : creatures) {
                 if (creature instanceof Protozoa) {
                     NGPoint2D pos = ((Protozoa)creature).getPosition();
-                    drawPixel(pos.getXAsInt(), pos.getYAsInt(), creature.getColor());
+                    drawPixel(pos.getXAsInt(), pos.getYAsInt(), calculateColor(creature));
                 }
             }
         }
