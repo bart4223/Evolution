@@ -20,3 +20,4 @@ Version history
     21.08.15    Cell colony with different color
     22.08.15    Help support
     23.08.15    New evolution process
+    25.08.15    Performance boost with Begin/End-Update
