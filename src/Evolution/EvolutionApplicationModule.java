@@ -94,8 +94,7 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
     }
 
     public void addSimpleColony(Double aX, Double aY) {
-        if (!FHabitat.InReproduction())
-            FHabitat.addCellColony(new SimpleColony(aX, aY));
+        FHabitat.addCellColony(new SimpleColony(aX, aY));
     }
 
     public void ShowHelp() {
