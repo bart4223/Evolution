@@ -66,6 +66,9 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         method.addParam("aName", NGObjectRequestParameter.ParamKind.String);
         method = registerObjectRequest("Habitat", FHabitat, "Tick", "setTick");
         method.addParam("aTick", NGObjectRequestParameter.ParamKind.Integer);
+        method = registerObjectRequest("Habitat", FHabitat, "RemoveCreature", "removeCreature");
+        method.addParam("aX", NGObjectRequestParameter.ParamKind.Double);
+        method.addParam("aY", NGObjectRequestParameter.ParamKind.Double);
         method = registerObjectRequest("HabitatModule", this, "SimpleColony", "addSimpleColony");
         method.addParam("aX", NGObjectRequestParameter.ParamKind.Double);
         method.addParam("aY", NGObjectRequestParameter.ParamKind.Double);

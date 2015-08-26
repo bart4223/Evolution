@@ -57,10 +57,22 @@ public class HabitatStageController extends NGStageController {
         Invoke(req);
     }
 
+    protected void removeCreature(Double aX, Double aY) {
+        Integer x = (int)(aX / FPixelSize);
+        Integer y = (int)(aY / FPixelSize);
+        NGObjectRequestItem req = newObjectRequest("Habitat", "RemoveCreature");
+        req.addParam("aX", x.doubleValue());
+        req.addParam("aY", y.doubleValue());
+        Invoke(req);
+    }
+
     protected void HandleMousePressed(MouseEvent e) {
         switch (e.getButton()) {
             case PRIMARY:
-                addSimpleColony(e.getX(), e.getY());
+                if (e.isAltDown())
+                    removeCreature(e.getX(), e.getY());
+                else
+                    addSimpleColony(e.getX(), e.getY());
                 break;
         }
     }
@@ -68,7 +80,10 @@ public class HabitatStageController extends NGStageController {
     protected void HandleMouseDragged(MouseEvent e) {
         switch (e.getButton()) {
             case PRIMARY:
-                addSimpleColony(e.getX(), e.getY());
+                if (e.isAltDown())
+                    removeCreature(e.getX(), e.getY());
+                else
+                    addSimpleColony(e.getX(), e.getY());
                 break;
         }
     }

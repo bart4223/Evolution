@@ -88,7 +88,7 @@ public class HabitatControlStageController extends NGStageController {
 
     protected void DoInitialize() {
         super.DoInitialize();
-        for (int i = 1; i <= 7; i++)
+        for (int i = 1; i <= 8; i++)
             cbSamples.getItems().add(NGStrings.addString("Biotope", NGStrings.leftPad(String.format("%d", i), 2, "0"), ""));
         cbProcesses.getItems().add("Game of Life");
         cbProcesses.getItems().add("Modulo Two");

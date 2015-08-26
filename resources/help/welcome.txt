@@ -1,6 +1,6 @@
 Welcome to evolution...
 
-The project visualize same evolution algorithm (like GameOfLife).
+The project visualize some evolution algorithm (like Game Of Life).
 
 Have fun...
 

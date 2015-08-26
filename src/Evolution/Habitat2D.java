@@ -79,4 +79,16 @@ public class Habitat2D extends CustomHabitat {
         return false;
     }
 
+    public void removeCreature(Double aX, Double aY) {
+        for (CustomCreature creature : FCreatures) {
+            if (creature instanceof Protozoa) {
+                NGPoint2D pos = ((Protozoa)creature).getPosition();
+                if  ((pos.getX() == aX && pos.getY() == aY)) {
+                    removeCreature(creature);
+                    return;
+                }
+            }
+        }
+    }
+
 }
