@@ -8,6 +8,7 @@ import Uniwork.Base.NGObjectRequestItem;
 import Uniwork.Visuals.NGDisplayView;
 import Uniwork.Visuals.NGGrid2DDisplayController;
 import Uniwork.Visuals.NGStageController;
+import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -40,6 +41,7 @@ public class HabitatStageController extends NGStageController {
         dcgrid.GridDistance =FPixelSize;
         dcgrid.GridColor = Color.DARKGRAY;
         dcgrid.AlternateGridColor = false;
+        dcgrid.DrawGrid = getConfigurationPropertyAsBoolean("Habitat.DrawGrid", true);
         registerDisplayController(dcgrid);
         Habitat2DDisplayController dchabitat = new Habitat2DDisplayController(Layer0, "Habitat");
         dchabitat.setPixelSize(FPixelSize);

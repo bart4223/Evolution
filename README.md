@@ -9,6 +9,7 @@ Configuration
     ConsoleShowLog              Show console log              
     ConsoleShowLogEntrySource   Show the source of log entry
     Debuglevel                  0=low and >0=high
+    Habitat.DrawGrid            Draw grid in habitat
 
 Version history
 ===============
@@ -21,3 +22,4 @@ Version history
     22.08.15    Help support
     23.08.15    New evolution process
     25.08.15    Performance boost with Begin/End-Update
+    26.08.15    Remove creatures with ALT-Key

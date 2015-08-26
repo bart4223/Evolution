@@ -17,6 +17,7 @@ import Uniwork.UI.NGUIHelpContext;
 public class EvolutionApplicationModule extends NGVisualApplicationModule {
 
     protected CustomHabitat FHabitat;
+    protected Integer FSize ;
 
     @Override
     protected void DoBeforeInitialize() {
@@ -38,7 +39,7 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
     }
 
     protected void CreateHabitat() {
-        FHabitat = new Habitat2D(this, EvolutionConsts.C_COMPONENT_HABITAT, 80, 80);
+        FHabitat = new Habitat2D(this, EvolutionConsts.C_COMPONENT_HABITAT, FSize, FSize);
         FHabitat.setLogLevel(NGApplication.Application.getLogManager().getLogLevel());
         CustomEvolutionProcess ep = new GameOfLife2D(FHabitat);
         FHabitat.addEvolutionProcess(ep);
@@ -79,6 +80,7 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
 
     public EvolutionApplicationModule(NGComponent aOwner, String aName) {
         super(aOwner, aName);
+        FSize = 80;
         CreateHabitat();
         FStageManager.registerItemClass("Control", "Evolution.HabitatControlStageItem");
         FStageManager.registerItemClass("Habitat", "Evolution.HabitatStageItem");
@@ -110,6 +112,10 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
 
     public void removeLogListener(NGLogEventListener aLogListener) {
         FHabitat.removeLogListener(aLogListener);
+    }
+
+    public Integer getSize() {
+        return FSize;
     }
 
 }

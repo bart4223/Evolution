@@ -1,3 +1,4 @@
 ConsoleShowLog=false
 ConsoleShowLogEntrySource=false
 Debuglevel=5
+Habitat.DrawGrid=true
