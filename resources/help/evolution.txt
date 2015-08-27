@@ -1,17 +1,62 @@
 The evolution simulation based on a habitat with 80 x 80 cells. In these cells are live or die creatures like protozoa. Protozoa is a one celled creature and can live in cell colonies.
 
-Colonies are:
+Colonies are
 
     Blinker
     Bipole
     Clock
+    Lost
     Octogone
     Pentomino
     Porpoise
     Pulsator
     Simple
     Skid
+    SpaceInvader
     Toad
     Tripole
 
 In a biotope can live many colonies.
+
+Biotope samples are
+
+    Biotope 01
+      
+        Blinker
+        Clock
+    
+    Biotope 02
+    
+        Blinker
+        Clock
+        Toad
+        Octogone
+
+    Biotope 03
+
+        Bipole
+        Blinker
+        Tripole
+        Toad
+        Pulsator
+        Porpoise
+
+    Biotope 04
+
+        Skid
+    
+    Biotope 05
+
+        Lost
+    
+    Biotope 06
+
+        Pentomino
+    
+    Biotope 07
+
+        Simple (Random)
+    
+    Biotope 08
+    
+        SpaceInvader

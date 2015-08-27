@@ -23,3 +23,4 @@ Version history
     23.08.15    New evolution process
     25.08.15    Performance boost with Begin/End-Update
     26.08.15    Remove creatures with ALT-Key
+    27.08.15    Max creature age calculation changed

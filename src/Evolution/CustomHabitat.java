@@ -50,10 +50,12 @@ public abstract class CustomHabitat extends NGComponent implements NGTickListene
     }
 
     protected void UpdateMaxCreatureAge() {
+        Double maxAge = 0.0;
         for (CustomCreature creature : FCreatures) {
-            if (FMaxCreatureAge < creature.getAge())
-                FMaxCreatureAge = creature.getAge();
+            if (maxAge < creature.getAge())
+                maxAge = creature.getAge();
         }
+        FMaxCreatureAge = maxAge;
     }
 
     protected void DoEvolutionEnd(CustomEvolutionProcess aEvolutionProcess) {
