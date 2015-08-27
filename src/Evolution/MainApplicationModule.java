@@ -1,9 +1,9 @@
 package Evolution;
 
 import Uniwork.Appl.NGCustomStageItem;
-import Uniwork.UI.NGUIHelpContext;
 import Uniwork.Appl.NGVisualApplicationModule;
 import Uniwork.Base.NGComponent;
+import Uniwork.UI.NGUIHelpToolboxContext;
 
 public class MainApplicationModule extends NGVisualApplicationModule {
 
@@ -33,11 +33,11 @@ public class MainApplicationModule extends NGVisualApplicationModule {
         FDescription = "Main";
         FStageManager.registerItemClass("Main", "Evolution.MainStageItem");
         FStageManager.registerItemClass("Console", "Uniwork.UI.NGUIConsoleStageItem");
-        FToolboxManager.registerItemClass("Help", "Uniwork.UI.NGUIHelpStageItem");
+        FToolboxManager.registerItemClass("Help", "Uniwork.UI.NGUIHelpToolboxItem");
     }
 
     public void ShowHelp() {
-        FToolboxManager.ShowToolbox("Help", String.format("%s.Help", getDescription()), new NGUIHelpContext(Application.LoadResourceFileContent("help/welcome.txt")));
+        FToolboxManager.ShowToolbox("Help", String.format("%s.Help", getDescription()), new NGUIHelpToolboxContext(Application.LoadResourceFileContent("help/welcome.txt")));
     }
 
     public NGCustomStageItem getConsole() {

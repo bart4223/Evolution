@@ -12,7 +12,7 @@ import Uniwork.Base.NGComponent;
 import Uniwork.Base.NGObjectRequestMethod;
 import Uniwork.Base.NGObjectRequestParameter;
 import Uniwork.Misc.NGLogEventListener;
-import Uniwork.UI.NGUIHelpContext;
+import Uniwork.UI.NGUIHelpToolboxContext;
 
 public class EvolutionApplicationModule extends NGVisualApplicationModule {
 
@@ -84,7 +84,7 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
         CreateHabitat();
         FStageManager.registerItemClass("Control", "Evolution.HabitatControlStageItem");
         FStageManager.registerItemClass("Habitat", "Evolution.HabitatStageItem");
-        FToolboxManager.registerItemClass("Help", "Uniwork.UI.NGUIHelpStageItem");
+        FToolboxManager.registerItemClass("Help", "Uniwork.UI.NGUIHelpToolboxItem");
     }
 
     public CustomHabitat getHabitat() {
@@ -103,7 +103,7 @@ public class EvolutionApplicationModule extends NGVisualApplicationModule {
     }
 
     public void ShowHelp() {
-        FToolboxManager.ShowToolbox("Help", String.format("%s.Help", getDescription()), new NGUIHelpContext(Application.LoadResourceFileContent("help/evolution.txt")));
+        FToolboxManager.ShowToolbox("Help", String.format("%s.Help", getDescription()), new NGUIHelpToolboxContext(Application.LoadResourceFileContent("help/evolution.txt")));
     }
 
     public void addLogListener(NGLogEventListener aLogListener) {
