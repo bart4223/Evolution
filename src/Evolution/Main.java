@@ -33,8 +33,10 @@ public class Main extends NGApplication {
     }
 
     public void addEvolutionModule() {
-        EvolutionApplicationModule module = (EvolutionApplicationModule)addModule(EvolutionApplicationModule.class, true, String.format("%d", FModuleManager.getModuleCount()));
+        EvolutionApplicationModule module = (EvolutionApplicationModule)addModule(EvolutionApplicationModule.class, false, String.format("%d", FModuleManager.getModuleCount()));
         module.addLogListener(FMainModule.getConsole());
+        module.setDescription(String.format("%d", FModuleManager.getModuleCount() - 1));
+        module.Initialize();
     }
 
 }
