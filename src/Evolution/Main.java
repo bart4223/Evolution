@@ -1,7 +1,6 @@
 package Evolution;
 
 import Uniwork.Appl.NGApplication;
-import Uniwork.Appl.NGCustomApplicationModule;
 
 public class Main extends NGApplication {
 
