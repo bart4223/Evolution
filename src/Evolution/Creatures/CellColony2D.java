@@ -4,7 +4,7 @@ import Uniwork.Graphics.NGPoint2D;
 import Uniwork.Misc.NGRandomGenerator;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CellColony2D extends CustomCellColony {
 
@@ -22,7 +22,7 @@ public class CellColony2D extends CustomCellColony {
         return res;
     }
 
-    public ArrayList<NGPoint2D> getPoints() {
+    public CopyOnWriteArrayList<NGPoint2D> getPoints() {
         return null;
     }
 

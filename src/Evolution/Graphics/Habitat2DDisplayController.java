@@ -8,7 +8,7 @@ import Uniwork.Visuals.NGDisplayController;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Habitat2DDisplayController extends NGDisplayController {
 
@@ -33,7 +33,7 @@ public class Habitat2DDisplayController extends NGDisplayController {
     protected void DoRender() {
         super.DoRender();
         if (Habitat != null) {
-            ArrayList<CustomCreature> creatures = Habitat.getCreaturesAsArray();
+            CopyOnWriteArrayList<CustomCreature> creatures = Habitat.getCreaturesAsArray();
             for (CustomCreature creature : creatures) {
                 if (creature instanceof Protozoa) {
                     NGPoint2D pos = ((Protozoa)creature).getPosition();

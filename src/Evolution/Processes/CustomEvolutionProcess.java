@@ -4,14 +4,14 @@ import Evolution.Creatures.CustomCreature;
 import Evolution.CustomHabitat;
 import Uniwork.Base.NGObject;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class CustomEvolutionProcess extends NGObject {
 
     protected CustomHabitat FHabitat;
-    protected ArrayList<CustomCreature> FCreaturesToBorn;
-    protected ArrayList<CustomCreature> FCreaturesToDie;
+    protected CopyOnWriteArrayList<CustomCreature> FCreaturesToBorn;
+    protected CopyOnWriteArrayList<CustomCreature> FCreaturesToDie;
 
     protected void DoExecute() {
 
@@ -36,8 +36,8 @@ public abstract class CustomEvolutionProcess extends NGObject {
     public CustomEvolutionProcess(CustomHabitat aHabitat) {
         super();
         FHabitat = aHabitat;
-        FCreaturesToBorn = new ArrayList<CustomCreature>();
-        FCreaturesToDie = new ArrayList<CustomCreature>();
+        FCreaturesToBorn = new CopyOnWriteArrayList<CustomCreature>();
+        FCreaturesToDie = new CopyOnWriteArrayList<CustomCreature>();
     }
 
     public CustomHabitat getHabitat() {

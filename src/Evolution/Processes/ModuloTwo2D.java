@@ -9,7 +9,7 @@ import Uniwork.Graphics.NGPoint2D;
 import Uniwork.Misc.NGRandomGenerator;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ModuloTwo2D extends CustomEvolutionProcess {
 
@@ -33,9 +33,9 @@ public class ModuloTwo2D extends CustomEvolutionProcess {
         ToBorn(protozoa);
     }
 
-    protected ArrayList<CustomCreature> getNeighbors(int aX, int aY) {
-        ArrayList<CustomCreature> res = new ArrayList<CustomCreature>();
-        ArrayList<HabitatCell> cells = FHabitat.getCells();
+    protected CopyOnWriteArrayList<CustomCreature> getNeighbors(int aX, int aY) {
+        CopyOnWriteArrayList<CustomCreature> res = new CopyOnWriteArrayList<CustomCreature>();
+        CopyOnWriteArrayList<HabitatCell> cells = FHabitat.getCells();
         for (int offsety = -1; offsety <= 1; offsety++) {
             for (int offsetx = -1; offsetx <= 1; offsetx++) {
                 if (offsetx != 0 || offsety != 0) {
@@ -55,10 +55,10 @@ public class ModuloTwo2D extends CustomEvolutionProcess {
 
     @Override
     protected void DoExecute() {
-        ArrayList<HabitatCell> cells = FHabitat.getCells();
+        CopyOnWriteArrayList<HabitatCell> cells = FHabitat.getCells();
         for (int y = 0; y < FHeight; y++) {
             for (int x = 0; x < FWidth; x++) {
-                ArrayList<CustomCreature> neighbors = getNeighbors(x, y);
+                CopyOnWriteArrayList<CustomCreature> neighbors = getNeighbors(x, y);
                 HabitatCell cell = cells.get(y * FWidth + x);
                 CustomCreature creature = cell.getCreature();
                 if (creature == null) {

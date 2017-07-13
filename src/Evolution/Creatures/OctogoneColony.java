@@ -3,13 +3,13 @@ package Evolution.Creatures;
 import Uniwork.Graphics.NGPoint2D;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class OctogoneColony extends CellColony2D {
 
     @Override
-    public ArrayList<NGPoint2D> getPoints() {
-        ArrayList<NGPoint2D> res = new ArrayList<NGPoint2D>();
+    public CopyOnWriteArrayList<NGPoint2D> getPoints() {
+        CopyOnWriteArrayList<NGPoint2D> res = new CopyOnWriteArrayList<NGPoint2D>();
         res.add(new NGPoint2D(FX + 3, FY));
         res.add(new NGPoint2D(FX + 4, FY));
         res.add(new NGPoint2D(FX + 2, FY + 1));

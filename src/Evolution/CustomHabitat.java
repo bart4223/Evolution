@@ -6,15 +6,15 @@ import Evolution.Processes.CustomEvolutionProcess;
 import Uniwork.Base.NGComponent;
 import Uniwork.Misc.*;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class CustomHabitat extends NGComponent implements NGTickListener {
 
-    protected ArrayList<HabitatEventListener> FEventListeners;
-    protected ArrayList<CustomEvolutionProcess> FEvolutionProcesses;
-    protected ArrayList<CustomCreature> FCreatures;
-    protected ArrayList<HabitatCell> FCells;
+    protected CopyOnWriteArrayList<HabitatEventListener> FEventListeners;
+    protected CopyOnWriteArrayList<CustomEvolutionProcess> FEvolutionProcesses;
+    protected CopyOnWriteArrayList<CustomCreature> FCreatures;
+    protected CopyOnWriteArrayList<HabitatCell> FCells;
     protected Integer FGenerationCount;
     protected Integer FMaxCreatureCount;
     protected Double FMaxCreatureAge;
@@ -191,10 +191,10 @@ public abstract class CustomHabitat extends NGComponent implements NGTickListene
         FTick = new NGTickGenerator(10);
         FTick.NewItem("Main", 10);
         FTick.addListener("Main", this);
-        FEventListeners = new ArrayList<HabitatEventListener>();
-        FCells = new ArrayList<HabitatCell>();
-        FCreatures = new ArrayList<CustomCreature>();
-        FEvolutionProcesses = new ArrayList<CustomEvolutionProcess>();
+        FEventListeners = new CopyOnWriteArrayList<HabitatEventListener>();
+        FCells = new CopyOnWriteArrayList<HabitatCell>();
+        FCreatures = new CopyOnWriteArrayList<CustomCreature>();
+        FEvolutionProcesses = new CopyOnWriteArrayList<CustomEvolutionProcess>();
         FGenerationCount = 0;
         FMaxCreatureCount = 0;
         FMaxCreatureAge = 0.0;
@@ -243,12 +243,12 @@ public abstract class CustomHabitat extends NGComponent implements NGTickListene
         return FCreatures.iterator();
     }
 
-    public synchronized ArrayList<CustomCreature> getCreaturesAsArray() {
-        ArrayList<CustomCreature> res = (ArrayList<CustomCreature>)FCreatures.clone();
+    public synchronized CopyOnWriteArrayList<CustomCreature> getCreaturesAsArray() {
+        CopyOnWriteArrayList<CustomCreature> res = (CopyOnWriteArrayList<CustomCreature>)FCreatures.clone();
         return res;
     }
 
-    public ArrayList<HabitatCell> getCells() {
+    public CopyOnWriteArrayList<HabitatCell> getCells() {
         return FCells;
     }
 

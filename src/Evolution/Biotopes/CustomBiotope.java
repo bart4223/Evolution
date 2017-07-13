@@ -3,14 +3,14 @@ package Evolution.Biotopes;
 import Evolution.Creatures.CustomCellColony;
 import Uniwork.Base.NGObject;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class CustomBiotope extends NGObject {
 
     protected String FName;
     protected String FDescription;
-    protected ArrayList<CustomCellColony> FColonies;
+    protected CopyOnWriteArrayList<CustomCellColony> FColonies;
 
     public String getInfo() {
         return String.format("%s \"%s\"", FName, FDescription);
@@ -18,7 +18,7 @@ public abstract class CustomBiotope extends NGObject {
 
     public CustomBiotope() {
         super();
-        FColonies = new ArrayList<CustomCellColony>();
+        FColonies = new CopyOnWriteArrayList<CustomCellColony>();
         FName = "";
         FDescription = "";
     }
